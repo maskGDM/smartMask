@@ -3,6 +3,7 @@ package com.example.smartmask;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -54,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
             stringRequestVolley(jsonLogin);
         });
         
+    }
+    public void Login(View view){
+        Intent intent=new Intent(MainActivity.this, RegisterActivity.class);
+        Bundle b=new Bundle();
+        intent.putExtras(b);
+        startActivity(intent);
     }
 
     private void stringRequestVolley(String json) {
