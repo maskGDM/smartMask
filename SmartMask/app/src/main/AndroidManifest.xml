@@ -11,9 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartMask">
         <activity android:name=".ConfigureValues"></activity>
-        <activity android:name=".Profile" />
         <activity android:name=".ModalInformation" />
-        <activity android:name=".Settings" />
         <activity android:name=".Dashboard" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">
