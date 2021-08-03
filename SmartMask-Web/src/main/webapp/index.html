@@ -1,206 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Smart Box App</title>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Smart Face Mask App</title>
+
         <link href="img/favicon.svg" rel="shortcut icon" sizes="32x32" >
-        <link href="css/styles.css" rel="stylesheet" type="text/css"/>
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+        <link href="css/estilos_1.css" rel="stylesheet" type="text/css"/>
+        <link href="css/estilos.css" rel="stylesheet" type="text/css"/>
+        <link href="css/custom-responsive-styles.css" rel="stylesheet" type="text/css"/>
+
     </head>
     <body>
-        <header class="hero">
-            <nav class="nav__hero">
-                <div class="container nav__container">
-                    <div class="logo">
-                        <h2 class="logo__name">Smart Box App<span class="point">.</span></h2>
+        <header style="height: 800px;">
+            <div class="container">
+                <nav>
+                    <a href="#" id="icono" class="icono">Menu</a>
+                    <div class="enlaces uno" id="enlaces">
+                        <a href="">Home</a>
+                        <a href="">About</a>
+                        <a href="">Contact</a>
                     </div>
+                </nav>
+                <div class="textos">
+                    <h1>Smart Face Mask</h1>
 
-            </nav>
-
-
-            <section class="container hero__main">  
-                <div class="hero__textos">
-                    <h1 class="title">The Best <span class="title--active">App.</span></h1> 
-                    <p class="copy">We care <span class="copy__active">about your well-being and safety</span></p>
-                    <a href="pages/login.html" class="cta">Sign In</a>
+                    <a href="pages/login.html">Login</a>
                 </div>
-
-            </section>
+                <img src="" alt="">
+            </div>
         </header>
-
-        <main>
-            <section class="services">
-                <div class="container">
-                    <h2 class="subtitle">Our Services<span class="point">.</span></h2>
-                    <p class="copy__section">We offer the best option to take care of your health.</p>
-
-                    <article class="container-cards">
-                        <div class="card">
-
-                            <div class="cards__text">
-                                <p class="card__list">Air Quality</p>
-                                <h3 class="card__title">Alert<span class="point">.</span></h3>
-                                <p class="card__copy">You can know the air quality and be alerted when your health is at risk!</p>
-                                <a href="#" class="card__button">Learn more</a>
-                            </div>
-                        </div>
-                        <div class="card">
-
-                            <div class="cards__text">
-                                <p class="card__list">Humidity and Pressure</p>
-                                <h3 class="card__title">Alert<span class="point">.</span></h3>
-                                <p class="card__copy">You can know the air quality and be alerted when your health is at risk!</p>
-                                <a href="#" class="card__button">Learn more</a>
-                            </div>
-                        </div>
-                        <div class="card">
-
-                            <div class="cards__text">
-                                <p class="card__list">Temperature</p>
-                                <h3 class="card__title">Alert<span class="point">.</span></h3>
-                                <p class="card__copy">You can know the air quality and be alerted when your health is at risk!</p>
-                                <a href="#" class="card__button">Learn more</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </section>
-
-            <section class="testimony">
-                <div class="container">
-                    <h2 class="subtitle">Developers<span class="point">.</span></h2>
-                    <p class="copy__section">Meet our developers.</p>
-
-                    <div class="testimony-container">
-                        <div class="testimony__card">
-
-                            <img src="img/WhatsApp Image 2021-03-03 at 7.47.28 PM.jpeg" class="testimony__img">
-                            <div class="testimony__copy">
-                                <i class='bx bxl-redux testimony__logo'></i>
-
-                                <div class="testimony__info">
-                                    <h3 class="testimony__name">Dayanna Velez</h3>
-                                    <p class="testimony__position">Bricex Company</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimony__card">
-
-                            <img src="img/WhatsApp Image 2021-03-03 at 7.52.09 PM.jpeg"  class="testimony__img">
-                            <div class="testimony__copy">
-                                <i class='bx bxl-redux testimony__logo'></i>
-                                <div class="testimony__info">
-                                    <h3 class="testimony__name">Geovanny Brito</h3>
-                                    <p class="testimony__position">Bricex Company</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="testimony__card">
-                            <img src="img/WhatsApp Image 2021-03-03 at 7.59.20 PM.jpeg" class="testimony__img">
-                            <div class="testimony__copy">
-                                <i class='bx bxl-redux testimony__logo'></i>
-                                <div class="testimony__info">
-                                    <h3 class="testimony__name">Michelle Solano</h3>
-                                    <p class="testimony__position">Bricex Company</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-            <section class="email container container--modifier">
-                <h2 class="subtitle subtitle--modifier">We are your best option to protect your health <span class="point">.</span></h2>
-
-                <p class="copy__section copy__section--modifier">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab, et dolore id necessitatibus quibusdam rem accusamus fugiat doloremque voluptatibus eius!</p>
-
-                <div class="check">
-                    <div class="check__item">
-                        <i class='bx bx-check' ></i>
-                        <div class="check__numbers">
-                            <p class="check__number">+200</p>
-                            <p class="check__copy">Users</p>
-                        </div>
-                    </div>
-                    <div class="check__item">
-                        <i class='bx bx-check' ></i>
-                        <div class="check__numbers">
-                            <p class="check__number">+200</p>
-                            <p class="check__copy">Users</p>
-                        </div>
-                    </div>
-                    <div class="check__item">
-                        <i class='bx bx-check' ></i>
-                        <div class="check__numbers">
-                            <p class="check__number">+200</p>
-                            <p class="check__copy">Users</p>
-                        </div>
-                    </div>
-                </div>
-                <form class="newsletter">
-                    <input type="text" class="newsletter__input" placeholder="Ingresa tu email">
-                    <input type="submit" class="newsletter__submit" value="Comienza hoy">
-                </form>
-            </section>
-        </main>
-
-        <footer class="footer">
-            <div class="container footer__caption">
-                <section class="download">
-                    <h3 class="title__footer">Download our App</h3>
-                    <div class="download__app">
-                        <div class="download__item">
-                            <i class='bx bxl-apple download__logo' ></i>
-                            <h4 class="download__title">App Store</h4>
-                        </div>
-                        <div class="download__item">
-                            <i class='bx bxl-play-store download__logo' ></i>
-                            <h4 class="download__title">Play Store</h4>
-                        </div>
-                    </div>
-                    <div class="footer__copy">
-                        <p class="copyright">Bricex Company &copy; 2021 All rights reserved</p>
-
-                        <a href="#" class="politica__privacidad politica__privacidad--margin">Privacy Policy</a>
-                        <a href="#" class="politica__privacidad ">Terms & Conditions</a>
-                    </div>
-                </section>
-                <section class="get-email">
-                    <h3 class="title__footer">¿You are ready to work with us?</h3>
-                    <form class="newsletter newsletter--modifier">
-                        <input type="text" class="newsletter__input" placeholder="Email">
-                        <input type="submit" class="newsletter__submit" value="Start today">
-                    </form>
-                    <div class="socialmedia">
-                        <p class="socialmedia__legend">Follow us on:</p>
-                        <i class='socialmedia__icon bx bxl-facebook-circle'></i>
-                        <i class='socialmedia__icon bx bxl-linkedin-square'></i>                                                                                                        
-                        <i class='socialmedia__icon bx bxl-twitter' ></i>   
-                        <i class='socialmedia__icon bx bxl-instagram' ></i>
-                        <i class='socialmedia__icon bx bxl-github' ></i>  
-                    </div>
-                </section>
+        <section class="banner-wave">
+            <div class="wave">
+                <div style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #fff;"></path></svg></div>
             </div>
-
-            <div class="contact">
-                <div class="item__contact">
-                    <i class='bx bx-copyright contact__icon' ></i>
-                    <h3 class="contact__title">Bricex Company</h3>
-                </div>
-                <div class="item__contact">
-                    <i class='bx bx-mail-send contact__icon' ></i>
-                    <h3 class="contact__title">bricex@gmail.com</h3>
-                </div>
-
-                <div class="item__contact item__contact--gold">
-                    <i class='bx bxs-chat contact__icon contact__icon--modifier' ></i>
-                    <h3 class="contact__title">Contact us now</h3>
+        </section>
+        <section class="contenedor sobre-nosotros">
+            <h2 class="titulo">About the Smart Face Mask</h2>
+            <div class="contenedor-sobre-nosotros">
+                <img src="img/login.svg" class="imagen-about-us"  alt="">
+                <div >                   
+                    <p style="text-align: justify;   padding: 0px 0px 30px 15px;">Masks are recommended as a barrier that helps prevent respiratory droplets from traveling through the air to other people when they cough, sneeze, speak, or raise their voices. However, due to the high demand during the pandemic, it has been shown that people make their masks at home, this can give a false sense of security. Choosing the wrong mask lowers the level of protection required against inhalation of infectious agents.
+                        <br><br> Masks are particularly essential in times where social distancing is difficult to maintain. But correct and prolonged use, for example in clinical settings, causes contamination by the user himself, creating a false sense of security since people are unaware when the toxic gases outside or inside the mask reach dangerous levels for health.</p>                    
                 </div>
             </div>
+        </section>
+        <footer>
+            <div class="contenedor-footer">
+                <div class="content-foo">
+                    <h4>Teléfono</h4>
+                    <p>+593 99 424 267</p>
+                </div>
+                <div class="content-foo">
+                    <h4>Email</h4>
+                    <p>bricex.company@gmail.com</p>
+                </div>
+                <div class="content-foo">
+                    <h4>Location</h4>
+                    <p>Quevedo-Los Rios-Ecuador</p>
+                </div>
+            </div>
+            <h2 class="titulo-final">&copy; Bricex | Bricex Company</h2>
         </footer>
+        <script src="js/script.js" type="text/javascript"></script>
     </body>
 </html>
