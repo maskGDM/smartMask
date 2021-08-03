@@ -175,6 +175,7 @@
 
 
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
@@ -219,10 +220,22 @@
                 android:id="@+id/tablogout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/ic_baseline_login_24"
-                android:text="LOG OUT" />
+                android:icon="@android:drawable/ic_menu_agenda"
+                android:text="REPORT" />
         </com.google.android.material.tabs.TabLayout>
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log out"
+        android:textColor="#9C27B0"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="585dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
