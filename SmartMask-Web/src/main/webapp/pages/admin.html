@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" ng-app="app">
+    <head>
+        <title>Smart Box App</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../img/favicon.svg" rel="shortcut icon" sizes="32x32" >
+        <link href="../css/barraprogreso.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lumen/bootstrap.min.css" rel="stylesheet"/>
+
+        <script src="../js/jquery.min.js" type="text/javascript"></script>
+        <script src="../js/popper.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../js/bootstrap-select.min.js" type="text/javascript"></script>
+        <script src="../js/Chart.bundle.min.js" type="text/javascript"></script>
+        <script src="../js/angular.js" type="text/javascript"></script>
+        <script src="../js/angular-route.js" type="text/javascript"></script>
+        <script src="../js/sweetalert.min.js" type="text/javascript"></script>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://kit.fontawesome.com/92f6e27e1c.js"></script>
+        <script src="../js/lightbox.js" type="text/javascript"></script>
+
+    </head>
+
+    <body ng-controller="AdminController">
+        <div id="contenedor_carga">
+            <div id="carga">
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="../">Smart Box App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                    </li>
+                    <li class="nav-item">
+                    </li>
+                    <li class="nav-item">
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{userData.names}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <a onclick="profileadmin();"><button class="dropdown-item" type="button">Profile</button></a>
+                            <a onclick="logOff();"><button class="dropdown-item" type="button">Log Off</button></a>
+                        </div>
+                    </div>
+                    <div>
+                       <a href="{{userData.imguser}}"  data-lightbox="roadtrip"  > <img ng-src="{{userData.imguser}}" alt="" width="36" style="display:block; margin:auto;  height:auto; max-width: 100%;right:2%;padding: 0;"/></a>
+                    </div>
+                </form>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="">
+                <input type="text" style="border: none">
+            </div>
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">User Administration</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Managing Gas Levels</a>
+                </li>
+                <!--                <li class="nav-item">
+                                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Manage Cities</a>
+                                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-metano-tab" data-toggle="pill" href="#pills-metano" role="tab" aria-controls="pills-metano" aria-selected="false">Add Administrators</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-viewadmin-tab" data-toggle="pill" href="#pills-viewadmin" role="tab" aria-controls="pills-viewadmin" aria-selected="false" ng-click="viewAdmins();" >View administrators</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-addmask-tab" data-toggle="pill" href="#pills-addmask" role="tab" aria-controls="pills-addmask" aria-selected="false" ng-click="viewMask();" >Insert Masks</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <label style="padding: 2.5%; top: 1%;font-family: sans-serif;">Air quality: </label>        
+                    <button class="btn btn btn-outline-info" onclick="abrirModal0();">View Report</button>
+                    <button class="btn btn-outline-warning" onclick="abrirModalThingspeak();">View Thingspeak Report</button>
+                    <li>
+                       <strong>Report</strong>
+                    </li>
+                    
+                    <div class="row" >      
+                        <div class="col-3"  >   
+                            <label>Start date:</label>
+                            <input type="date" class="form-control" id="dateInit">
+                        </div>
+                        <div class="col-3"  >   
+                            <label>End date:</label>
+                            <input type="date" class="form-control" id="dateEnd">
+                        </div>
+                        <div class="col-3"  >   
+                            <label>Data Range:</label>
+                            <input type="number" class="form-control" placeholder="Limit" min="0" max="1000" step="10" value="50" id="limitAdmin">
+                        </div>
+                        <div style="padding-top: 2.5%;">
+                        <button class="btn btn-success" ng-click="airQualityGases();"><i class="fab fa-searchengin"></i></button>
+                        </div>
+                        </div>
+                    <div class="col-lg-12">
+                        <div class="au-card m-b-30">
+                            <div class="au-card-inner">
+                                <canvas id="ChartReport" width="100" height="100"></canvas>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <!--                    <form style="padding: 2.5%;padding-top: 0%;">
+                                            <div class="row"  >
+                                                <div class="col-md-4" >
+                                                    <label >Choose a country</label>
+                                                    <select class="form-control selectpicker" data-live-search="true" id="selectcountry">
+                                                        <option ng-repeat="viewCountry in tableCountry" value="{{viewCountry.countryid}}">{{viewCountry.country}}</option>
+                                                    </select>      
+                                                </div>
+                                                <div class="col-md-4" >
+                                                    <label >Choose a province</label>
+                                                    <select class="form-control selectpicker"  data-live-search="true"  id="selectprovince">
+                                                        <option ng-repeat="viewProvince in tableProvince" value="{{viewProvince.provinceid}}">{{viewProvince.province}}</option>
+                                                    </select>         
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label >Choose a city</label>
+                                                    <select class="form-control selectpicker"  data-live-search="true"  id="selectcity">
+                                                        <option ng-repeat="viewCity in tableCity" value="{{viewCity.cityid}}">{{viewCity.city}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>-->
+                    <form style="padding: 2.5%;padding-top: 0%;">
+                        <i class="fas"><label style="font-family: sans-serif;font-size: 18px;">Setting Carbon Dioxide Levels </label></i>
+                        <div class="row">
+                            <div class="col-4">
+                                <label style="padding-top: 3%;">Minimum Level:</label>
+                                <input type="number" class="form-control" id="minvalueco2" ng-value="selectDataMask.minvalueco2">
+                            </div> 
+                            <div class="col-4">
+                                <label style="padding-top: 3%;">Maximum Level:</label>
+                                <input type="number" class="form-control"  id="maxvalueco2" ng-value="selectDataMask.maxvalueco2" >
+                            </div> 
+
+                        </div>
+                    </form>
+                    <form style="padding: 2.5%;padding-top: 0%;">
+                        <i class="fas"><label style="font-family: sans-serif;font-size: 18px;">Setting Carbon Monoxide Levels </label></i>
+                        <div class="row">
+                            <div class="col-4">
+                                <label style="padding-top: 3%;">Minimum Level:</label>
+                                <input type="number" class="form-control"  id="minvalueco"  ng-value="selectDataMask.minvalueco">
+                            </div> 
+                            <div class="col-4">
+                                <label style="padding-top: 3%;">Maximum Level:</label>
+                                <input type="number" class="form-control"  id="maxvalueco"  ng-value="selectDataMask.maxvalueco" >
+                            </div> 
+                        </div>
+                    </form>
+                    <form style="padding: 2.5%;padding-top: 0%;">
+                        <i class="fas"><label style="font-family: sans-serif;font-size: 18px;">Setting Ammonia Levels </label></i>
+                        <div class="row">
+                            <div class="col-4">
+                                <label style="padding-top: 3%;">Minimum Level:</label>
+                                <input type="number" class="form-control"  id="minvaluenh3"  ng-value="selectDataMask.minvaluenh3">
+                            </div> 
+                            <div class="col-4">
+                                <label style="padding-top: 3%;">Maximum Level:</label>
+                                <input type="number" class="form-control" id="maxvaluenh3" ng-value="selectDataMask.maxvaluenh3">
+                            </div> 
+                        </div>
+                    </form>
+                    <form style="padding: 2.5%;padding-top: 0%;">
+                        <i class="fas"><label style="font-family: sans-serif;font-size: 18px;">Setting Butano Levels </label></i>
+                       <div class="row">
+                            <div class="col-4">
+                                <label style="padding-top: 3%;">Minimum Level:</label>
+                                <input type="number" class="form-control"  id="minvaluec4h10"  ng-value="selectDataMask.minvaluec4h10">
+                            </div> 
+                            <div class="col-4">
+                                <label style="padding-top: 3%;">Maximum Level:</label>
+                                <input type="number" class="form-control"  id="maxvaluec4h10"  ng-value="selectDataMask.maxvaluec4h10">
+                            </div> 
+                        </div>
+                    </form>
+                    <form style="padding: 2.5%;padding-top: 0%;">
+                        <i class="fas"><label style="font-family: sans-serif;font-size: 18px;">Setting Temperature Levels </label></i>
+                       <div class="row">
+                            <div class="col-4">
+                                <label style="padding-top: 3%;">Minimum Level:</label>
+                                <input type="number" class="form-control"  id="minvaluec4h10"  ng-value="selectDataMask.minvaluec4h10">
+                            </div> 
+                            <div class="col-4">
+                                <label style="padding-top: 3%;">Maximum Level:</label>
+                                <input type="number" class="form-control"  id="maxvaluec4h10"  ng-value="selectDataMask.maxvaluec4h10">
+                            </div> 
+                        </div>
+                    </form>
+                    <form style="padding: 2.5%;padding-top: 0%;">
+                        <i class="fas"><label style="font-family: sans-serif;font-size: 18px;">Setting Humidity Levels </label></i>
+                        <div class="row">
+                            <div class="col-4">
+                                <label style="padding-top: 3%;">Minimum Level:</label>
+                                <input type="number" class="form-control"  id="minvaluec4h10"  ng-value="selectDataMask.minvaluec4h10">
+                            </div> 
+                            <div class="col-4">
+                                <label style="padding-top: 3%;">Maximum Level:</label>
+                                <input type="number" class="form-control"  id="maxvaluec4h10"  ng-value="selectDataMask.maxvaluec4h10">
+                            </div> 
+                        </div>
+                        
+                        <div style="padding-top: 3.5%;">
+                            <button type="button" class="btn btn-warning" ng-click="configureDataAdmin();" >Configure</button> 
+                            <button type="button" class="btn btn-danger" ng-click="selectData();;" >Restore</button>                     
+                        </div>
+                    </form>
+                    
+                </div>
+                <!--                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                    <form style="padding: 2.5%;padding-top: 0%;">
+                                        <label style="font-family: sans-serif;font-size: 20px;">Add Country: </label>
+                                        <div class="row"  >
+                                            <div class="col-md-4">
+                                                <label>Country</label>
+                                                <input type="text" class="form-control" placeholder="Country">  
+                                            </div>
+                                            <div style="padding-top: 1%;padding: 2.5%;">
+                                                <button type="button" class="btn btn-success" >Add</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form style="padding: 2.5%;padding-top: 0%;">
+                                        <label style="font-family: sans-serif;font-size: 20px;">Add Province: </label>
+                                        <div class="row"  >
+                                            <div class="col-md-4" >
+                                                <label >Choose a Country</label>
+                                                <select class="form-control selectpicker" data-live-search="true" id="selectcountryadd-province">
+                                                    <option ng-repeat="viewCountry in tableCountry" value="{{viewCountry.countryid}}">{{viewCountry.country}}</option>
+                                                </select>             
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Province:</label>
+                                                <input type="text" class="form-control" placeholder="Province">  
+                                            </div>
+                                            <div style="padding-top: 1%;padding: 2.5%;">
+                                                <button type="button" class="btn btn-success" >Add</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form style="padding: 2.5%;padding-top: 0%;">
+                                        <label style="font-family: sans-serif;font-size: 20px;">Add City: </label>
+                                        <div class="row"  >
+                                            <div class="col-md-4" >
+                                                <label >Choose a Country</label>
+                                                <select class="form-control selectpicker" data-live-search="true" id="selectcountryadd-city">
+                                                    <option ng-repeat="viewCountry in tableCountry" value="{{viewCountry.countryid}}">{{viewCountry.country}}</option>
+                                                </select>             
+                                            </div>
+                                            <div class="col-md-4" >
+                                                <label >Choose a Province</label>
+                                                <select class="form-control selectpicker"  data-live-search="true"  id="selectprovinceadd-city">
+                                                    <option ng-repeat="viewProvince in tableProvince" value="{{viewProvince.provinceid}}">{{viewProvince.province}}</option>
+                                                </select>             
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label>City:</label>
+                                                <input type="text" class="form-control" placeholder="City">                    
+                                            </div>                           
+                                            <div style="padding-top: 1%;padding: 2.5%;">
+                                                <button type="button" class="btn btn-success" >Add</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>-->
+                <div class="tab-pane fade" id="pills-metano" role="tabpanel" aria-labelledby="pills-metano-tab">
+                    <form style="padding: 2.5%;padding-top: 0%;">
+                        <!--                        <button type="button" class="btn btn-secondary" style="float: right;">View All Administrators</button> -->
+                        <strong style="font-size: 22px;text-align: center;">Adding a New Administrator</strong>
+                        <div class="row"  >      
+                            <div class="col-8"  >   
+                                <label> Names</label>
+                                <input type="text" class="form-control" placeholder="Names" id="txtNames">
+                                <label style="padding-top: 3%;">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Last name" id="txtLastNames">
+                                <label style="padding-top: 3%;">Email</label>
+                                <input type="text" class="form-control" placeholder="Email" id="txtEmail">
+                                <label style="padding-top: 3%;">Birth Date</label>
+                                <input type="date" class="form-control" id="dateDateofBirth" >
+                                <label style="padding-top: 3%;">User</label>
+                                <input type="text" class="form-control" placeholder="User" id="txtUser">
+                                <label style="padding-top: 3%;">Password</label>
+                                <input type="password" class="form-control" placeholder="Password" id="txtPassword">
+                                <label style="padding-top: 3%;">Confirm Password</label>
+                                <input type="password" class="form-control" placeholder="Confirm Password" id="txtRepeatPassword">
+                                <div style="padding-top: 7%;float: right;">
+                                    <button type="button" class="btn btn-success"  onclick="userJSON(2);" >Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="pills-addmask" role="tabpanel" aria-labelledby="pills-addmask-tab">
+                    <form style="padding: 2.5%;padding-top: 0%;">
+                        <!--                        <button type="button" class="btn btn-secondary" style="float: right;">View All Administrators</button> -->
+                        <div class="row"  >      
+                            <div class="col-8"  >   
+                                <strong>Box Code</strong>
+                                <input type="text" class="form-control" placeholder="Mask Code" id="txtMaskCode">       
+                                <div style="padding-top: 3.5%;float: right;">
+                                    <button type="button" class="btn btn-success btn-lg"  ng-click="insertMask();" >Add</button>
+                                </div> 
+                                
+                                <div style="padding-left: 15%;">
+                                    
+                                <table class="table table-bordered" >      
+                                    <br> <br> <br>                      
+                                    <thead class="thead-light">
+                                    <br> <br> <br>
+                                    <tr>
+                                        <th><label style="padding-top: 3%;" >Box Code</label></th>
+                                        <th><label style="padding-top: 3%;">Date last modified</label></th>
+                                        <th><label style="padding-top: 3%;">State</label></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="viewMasks in tableMasks">
+                                            <td>{{viewMasks.mask_code}}</td>
+                                            <td>{{viewMasks.admissiondate}}</td>
+                                            <td ng-if="viewMasks.active==='f'" > <i class="fas fa-toggle-off"></i></td>   
+                                            <td ng-if="viewMasks.active==='t'" > <i class="fas fa-toggle-on"></i></td>   
+                                        </tr>                        
+                                    </tbody>
+                                </table> 
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="pills-viewadmin" role="tabpanel" aria-labelledby="pills-viewadmin-tab">
+                    <form style="padding-top: 3.5%;padding: 3.5%;">    
+                        <strong style="font-size: 22px;text-align: center;">List of Administrators</strong>
+                        <div style="height: 200px;overflow: auto;">
+                        <table class="table table-bordered" id="tablaEditar" >
+                            <thead class="thead-light">
+                                <tr>
+                                    <th><label style="padding-top: 3%;" >Names</label></th>
+                                    <th><label style="padding-top: 3%;">Last Names</label></th>
+                                    <th><label style="padding-top: 3%;">Email</label></th>
+                                    <th><label style="padding-top: 3%;">Birth Date</label></th>
+                                    <th><label style="padding-top: 3%;">Registration date</label></th>
+                                    <th><label style="padding-top: 3%;">User</label></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="viewAdmin in tabletAdmin">
+                                    <td>{{viewAdmin.names}}</td>
+                                    <td>{{viewAdmin.lastnames}}</td>
+                                    <td>{{viewAdmin.email}}</td>
+                                    <td>{{viewAdmin.birthdaydate}}</td>
+                                    <td>{{viewAdmin.registrationdate}}</td>
+                                    <td>{{viewAdmin.user}}</td>
+                                </tr>                        
+                            </tbody>
+                        </table> 
+                        </div>                            
+                    </form>
+                    <form style="padding-top: 3.5%;padding: 3.5%;">     
+                        <strong style="font-size: 22px;text-align: center;">List of Registered Users</strong>
+                        <div style="height: 200px;overflow: auto;">
+                        <table class="table table-bordered" id="tablaEditar" >
+                            <thead class="thead-light">
+                                <tr>
+                                    <th><label style="padding-top: 3%;">Names</label></th>
+                                    <th><label style="padding-top: 3%;">Last Names</label></th>
+                                    <th><label style="padding-top: 3%;">Email</label></th>
+                                    <th><label style="padding-top: 3%;">Birth Date</label></th>
+                                    <th><label style="padding-top: 3%;">Registration date</label></th>
+                                    <th><label style="padding-top: 3%;">User</label></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="viewUser in tableUser">
+                                    <td>{{viewUser.names}}</td>
+                                    <td>{{viewUser.lastnames}}</td>
+                                    <td>{{viewUser.email}}</td>
+                                    <td>{{viewUser.birthdaydate}}</td>
+                                    <td>{{viewUser.registrationdate}}</td>
+                                    <td>{{viewUser.user}}</td>
+                                </tr>                        
+                            </tbody>
+                        </table>                             
+                    </form>
+                </div>
+                </div>
+            </div>
+        </div>
+      
+        <div class="modal fade bd-example-modal-sm" id="staticBackdrop0" tabindex="-1" role="dialog" 
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content ">
+                    <div class="modal-headerM">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title" style="padding-top: 1%; padding-top:2.5%;text-align: center;font-size: 25px;">General Air Quality Data</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="">
+                            <input type="text" style="border: none" readonly="">
+                        </div>
+                        <div style="height: 400px;overflow: auto;">
+                            <table class="table table-responsive-md table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Hour</th>
+                                        <th scope="col">External Concentration</th>
+                                        <th scope="col">External Concentration</th>
+                                        <th scope="col">State</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="dataQuality in dataairQuality">
+                                        <th scope="row">{{dataQuality.datetimegistration}}</th>
+                                        <td>{{dataQuality.ppmexternal}}</td>
+                                        <td>{{dataQuality.ppminternal}}</td>
+                                        <td>{{dataQuality.alert}}</td>
+                                    </tr> 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade bd-example-modal-md" id="staticBackdropTS" tabindex="-1" role="dialog" 
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content ">
+                    <div class="modal-headerM">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title" style="padding-top: 1%; padding-top:2.5%;text-align: center;font-size: 25px;">General Air Quality Data</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="">
+                            <input type="text" style="border: none" readonly="">
+                        </div>
+                        <div style="height: 250px;">
+                            <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/1144376/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=20&type=line&update=15"></iframe>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="../js/angular/app.js" type="text/javascript"></script>
+        <script src="../js/angular/AdminController.js" type="text/javascript"></script>
+        <script src="../js/own/login.js" type="text/javascript"></script>
+        <script src="../js/own/util.js" type="text/javascript"></script>
+    </body>
+</html>

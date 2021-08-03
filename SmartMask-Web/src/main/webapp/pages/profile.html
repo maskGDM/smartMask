@@ -1,0 +1,151 @@
+<html lang="en" ng-app="app">
+    <head>
+        <title>Smart Box App - Profile</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../img/favicon.svg" rel="shortcut icon" sizes="32x32" >
+        <link href="../css/barraprogreso.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <!--                <link href="../css/lightbox.css" rel="stylesheet" type="text/css"/>-->
+        <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lumen/bootstrap.min.css" rel="stylesheet"/>
+
+        <script src="../js/angular.js" type="text/javascript"></script>
+        <script src="../js/angular-route.js" type="text/javascript"></script>
+        <script src="../js/jquery.min.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../js/Chart.bundle.min.js" type="text/javascript"></script>
+        <script src="../js/axios.min.js" type="text/javascript"></script>
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://kit.fontawesome.com/92f6e27e1c.js"></script>
+        <script src="../js/sweetalert.min.js" type="text/javascript"></script>
+        <script src="../js/console.image.js" type="text/javascript"></script>
+        <script src="../js/intense.js" type="text/javascript"></script>
+        <script src="../js/lightbox.js" type="text/javascript"></script>
+
+    </head>
+    <body ng-controller="ProfileController"> 
+        <div id="contenedor_carga">
+            <div id="carga">
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="../">Smart Box App </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="initiation();">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="dailyData();">Daily Data</a>
+                    </li>
+<!--                    <li class="nav-item" >
+                        <a class="nav-link" onclick="monthData();">Monthly Data</a>
+                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="reportData();" >Interval report</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <!--                    <button type="button" class="btn btn-primary">
+                                            Notifications <span class="badge badge-light">10</span>
+                                        </button>-->
+
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{userData.names}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <a onclick="profile();" ><button class="dropdown-item active" type="button">Profile</button> </a>
+                            <a onclick="setting();"><button class="dropdown-item" type="button">Configuration</button></a>
+                            <a onclick="logOff();"><button class="dropdown-item" type="button">Log Off</button></a>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="{{userData.imguser}}"  data-lightbox="roadtrip"  > <img src="{{userData.imguser}}" alt="" width="36" style="display:block; margin:auto;  height:auto; max-width: 100%;right:2%;padding: 0;"/></a>
+                    </div>
+                </form>
+            </div>
+        </nav>
+        <div class="container-xl">
+            <div style="float: left;padding-top: 3%;">
+                <img data-intense="{{userData.imguser}}" src="{{userData.imguser}}"  alt="{{userData.names}}" width="150" class="intense" style="display:block; margin:auto;  height:auto; max-width: 100%;right:2%;padding: 0;padding-top: 3%;" id="imgSelect"/>
+                <div style="float: left;padding-top: 3%;">
+                    <label  style="background: #127ba3; padding: 10px; color: white; border-radius: 10px; text-align: center; cursor: pointer" for="selectdImg"> Change profile photo </label>
+                    <input style="display: none" id="selectdImg" type="file" onchange="return validateFile(1)" name="imgUser">             
+                </div>
+                <div>
+                    <strong>Iniciaste Sesión con:</strong> <i ng-if="userData.socialnetworkid === '1'" class="fas fa-head-side-mask" style="font-size: 1.5rem;color:#121E31;"></i>
+                    <i ng-if="userData.socialnetworkid === '2'" class="fab fa-facebook" style="font-size: 1.5rem;color:#333;"></i>
+                    <i ng-if="userData.socialnetworkid === '3'" class="fab fa-google" style="font-size: 1.5rem;color:#121E31;"></i> 
+                </div>
+            </div>
+
+            <div class="col-md-10" style="float: left;padding-top: 3%;padding-left: 10%;">
+                <div class="row">
+                    <h6 style="font-size: 25px;font-family: sans-serif;">Personal Information</h6>
+                </div>
+                <div class="row" style="padding-top: 2%;">
+                    <div class="col-md-12">
+                        <strong>Names</strong>
+                        <input type="text" class="form-control"  id="txtNamesU"  maxlength="50" required ng-model="userData.names"> 
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 2%;">
+                    <div class="col-md-12">
+                        <strong>Last Name</strong> 
+                        <input type="text" class="form-control" id="txtLastNamesU" maxlength="50" required ng-model="userData.lastnames">
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 2%;">
+                    <div class="col-md-12">
+                        <strong>Email</strong> 
+                        <input type="text" class="form-control" id="txtEmailU"  ng-model="userData.email" >
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 2%;">
+                    <div class="col-md-12">
+                        <strong>Birth Date</strong>
+                        <input type="date" class="form-control"  id="dateDateofBirthU" ng-app=""ng-model="userData.birthdaydate" >
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 2%;">
+                    <div class="col-md-12">
+                        <strong>User</strong>
+                        <input ng-disabled="userData.socialnetworkcode !== ''" type="text" class="form-control" id="txtUserU" maxlength="50" required  ng-model="userData.user">
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 2%;">
+                    <div class="col-md-12">
+                        <strong>Password</strong>
+                        <input type="password" class="form-control" id="txtPasswordU" maxlength="50" required >
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 2%;">
+                    <div class="col-md-12">
+                        <strong>Confirm Password</strong>
+                        <input type="password" class="form-control"  id="txtRepeatPasswordU" maxlength="50" required >
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 2%;" ng-show="userData.socialnetworkcode !== ''">
+                    <div class="col-md-12">
+                        <strong>Code Social Network</strong> 
+                        <label class="form-control"  id="codeSocialNetword" >{{userData.socialnetworkcode}}</label>                            
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 2%;">
+                    <div class="col-md-12" >
+                        <button type="button" class="btn btn-success col-md-3" ng-click="editInformation();" >Edit</button>
+                        <button type="button" class="btn btn-danger col-md-3" ng-click="InformationAdmin();" >Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <script src="../js/angular/app.js" type="text/javascript"></script>
+        <script src="../js/angular/ProfileController.js" type="text/javascript"></script>
+        <script src="../js/own/util.js" type="text/javascript"></script>
+    </body>
+</html>

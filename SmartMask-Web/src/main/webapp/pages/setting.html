@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" ng-app="app">
+    <head>
+        <title>Smart Box App - Setting</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../img/favicon.svg" rel="shortcut icon" sizes="32x32" >
+        <link href="../css/barraprogreso.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lumen/bootstrap.min.css" rel="stylesheet"/>
+
+        <script src="../js/angular.js" type="text/javascript"></script>
+        <script src="../js/angular-route.js" type="text/javascript"></script>
+        <script src="../js/jquery.min.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../js/sweetalert.min.js" type="text/javascript"></script>
+        <script src="../js/Chart.bundle.min.js" type="text/javascript"></script>       
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+        <script src="https://kit.fontawesome.com/92f6e27e1c.js"></script>
+        <script src="../js/console.image.js" type="text/javascript"></script>
+        <script src="../js/lightbox.js" type="text/javascript"></script>
+
+    </head>
+    <body ng-controller="SettingController" >
+        <div id="contenedor_carga">
+            <div id="carga">
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="../">Smart Box App </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="initiation();">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="dailyData();">Daily Data</a>
+                    </li>
+                    <!--                    <li class="nav-item">
+                                            <a class="nav-link" onclick="monthData();">Monthly Data</a>
+                                        </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="reportData();" >Interval report</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <button type="button" class="btn btn-primary" onclick="modalmyMask();">
+                        My Box <span class="badge badge-light"  >{{countMask.length}}</span>
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{userData.names}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <a onclick="profile();" ><button class="dropdown-item" type="button">Profile</button> </a>
+                            <a onclick="setting();"><button class="dropdown-item active" type="button">Configuration</button></a>
+                            <a onclick="logOff();"><button class="dropdown-item" type="button">Log Off</button></a>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="{{userData.imguser}}"  data-lightbox="roadtrip"  > <img  ng-src="{{userData.imguser}}"  alt="" width="36" style="display:block; margin:auto;  height:auto; max-width: 100%;right:2%;padding: 0;"/></a> 
+
+                    </div>
+                </form>
+            </div>
+        </nav>
+        <div class="container" style="padding-top: 3%;padding-left: 3%;">
+            <div id="addMask">                
+            </div>
+            <div id="dataMask">
+                <form style="padding: 2.5%;padding-top: 0%;">
+                    <i class="fas"><label style="font-family: sans-serif;font-size: 18px;">Setting Carbon Dioxide Levels </label></i>
+                    <div class="row">
+                        <div class="col-4">
+                            <label style="padding-top: 3%;">Minimum Level:</label>
+                            <input type="number" class="form-control" id="minvalueco2" ng-value="selectDataMask.minvalueco2">
+                        </div> 
+                        <div class="col-4">
+                            <label style="padding-top: 3%;">Maximum Level:</label>
+                            <input type="number" class="form-control" id="maxvalueco2" ng-value="selectDataMask.maxvalueco2">
+                        </div> 
+                    </div>
+                </form>
+
+                <form style="padding: 2.5%;padding-top: 0%;">
+                    <i class="fas"><label style="font-family: sans-serif;font-size: 18px;">Setting Carbon Monoxide Levels </label></i>
+                    <div class="row">
+                        <div class="col-4">
+                            <label style="padding-top: 3%;">Minimum Level:</label>
+                            <input type="number" class="form-control"  id="minvalueco" ng-value="selectDataMask.minvalueco">
+                        </div> 
+                        <div class="col-4">
+                            <label style="padding-top: 3%;">Maximum Level:</label>
+                            <input type="number" class="form-control"  id="maxvalueco" ng-value="selectDataMask.maxvalueco" >
+                        </div> 
+
+                    </div>
+                </form>
+
+                <form style="padding: 2.5%;padding-top: 0%;">
+                    <i class="fas"><label style="font-family: sans-serif;font-size: 18px;">Setting Ammonia Levels </label></i>
+                    <div class="row">
+                        <div class="col-4">
+                            <label style="padding-top: 3%;">Minimum Level:</label>
+                            <input type="number" class="form-control"  id="minvaluenh3" ng-value="selectDataMask.minvaluenh3" >
+                        </div> 
+                        <div class="col-4">
+                            <label style="padding-top: 3%;">Maximum Level:</label>
+                            <input type="number" class="form-control" id="maxvaluenh3"  ng-value="selectDataMask.maxvaluenh3" >
+                        </div> 
+                    </div>
+                </form>
+                <form style="padding: 2.5%;padding-top: 0%;">
+                    <i class="fas"><label style="font-family: sans-serif;font-size: 18px;">Setting Butano Levels </label></i>
+                    <div class="row">
+                        <div class="col-4">
+                            <label style="padding-top: 3%;">Minimum Level:</label>
+                            <input type="number" class="form-control"  id="minvaluec4h10"  ng-value="selectDataMask.minvaluec4h10">
+                        </div> 
+                        <div class="col-4">
+                            <label style="padding-top: 3%;">Maximum Level:</label>
+                            <input type="number" class="form-control"  id="maxvaluec4h10"  ng-value="selectDataMask.maxvaluec4h10">
+                        </div> 
+                    </div>
+                </form>
+                <form style="padding: 2.5%;padding-top: 0%;">
+                    <i class="fas"><label style="font-family: sans-serif;font-size: 18px;">Setting Temperature Levels </label></i>
+                    <div class="row">
+                        <div class="col-4">
+                            <label style="padding-top: 3%;">Minimum Level:</label>
+                            <input type="number" class="form-control"  id="minvaluec4h10"  ng-value="selectDataMask.minvaluec4h10">
+                        </div> 
+                        <div class="col-4">
+                            <label style="padding-top: 3%;">Maximum Level:</label>
+                            <input type="number" class="form-control"  id="maxvaluec4h10"  ng-value="selectDataMask.maxvaluec4h10">
+                        </div> 
+                    </div>
+                </form>
+                <form style="padding: 2.5%;padding-top: 0%;">
+                    <i class="fas"><label style="font-family: sans-serif;font-size: 18px;">Setting Humidity Levels </label></i>
+                    <div class="row">
+                        <div class="col-4">
+                            <label style="padding-top: 3%;">Minimum Level:</label>
+                            <input type="number" class="form-control"  id="minvaluec4h10"  ng-value="selectDataMask.minvaluec4h10">
+                        </div> 
+                        <div class="col-4">
+                            <label style="padding-top: 3%;">Maximum Level:</label>
+                            <input type="number" class="form-control"  id="maxvaluec4h10"  ng-value="selectDataMask.maxvaluec4h10">
+                        </div> 
+                    </div>
+
+                    <button type="button" class="btn btn-warning" ng-click="configureData();" >Configure</button>
+                    <button type="button" class="btn btn-danger" ng-click="restoreMask();" >Restore</button>
+                </form>
+                <div>
+                    <div class="card-body">
+                        <h5 class="card-title">Add your new smart box!</h5>
+                        <p class="card-text">You will find the unique code of the mask in the instruction booklet</p>
+                        <button class="btn btn-primary" id="btnaddMask" onclick="openAddModal();">Add now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade bd-example-modal-sm" id="modalAddMask" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="overflow-y: auto;">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-headerM">
+                            <h5 class="modal-title" id="staticBackdropLabel" style="padding-top: 1%; padding-top:2.5%;text-align: center;font-size: 25px;">Add New Mask
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div class="modal-body"> 
+                            <div class="row">
+                                <div class="col-11">
+                                    <label style="padding-top: 3%;">Mask Code:</label>
+                                    <input type="text" class="form-control" id="txtMask" >      
+                                </div>
+
+                            </div>
+                            <br>
+
+                            <div class="row">  
+                                <div class="col-11">
+                                    <button data-dismiss="modal" class="btn btn-success" ng-click="addMaskCode();" >Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade bd-example-modal-sm" id="modalInformationMask" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="overflow-y: auto;">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-headerM">
+                            <h5 class="modal-title" id="staticBackdropLabel" style="font-family: sans-serif; padding: 2%;size: 25px;">Add Box
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </h5>
+                        </div>
+                        <div class="modal-body"> 
+                            <div ng-repeat="repeaatcountMask in countMask">
+                                <div class="row">
+                                    <div class="col-11" >
+                                        <label style="padding-top: 3%;">Box Code:</label>
+                                        <label class="form-control" id="maskCode" >{{repeaatcountMask.mask_code}}</label>   
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-11">
+                                        <label style="padding-top: 3%;">Date Added:</label>
+                                        <label class="form-control">{{repeaatcountMask.dateadded}}</label>   
+                                    </div>
+                                </div>
+                                <br>
+                                <button style="margin: -20px -50px; position: relative; top: 50%;left: 50%;"class="btn btn-danger" ng-click="deleteMask();">Delete</button>
+                                <hr>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="row">  
+                                <div class="col-11">
+                                    <button data-dismiss="modal" class="btn btn-success" data-dismiss="modal" >Ok</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="../js/angular/app.js" type="text/javascript"></script>
+            <script src="../js/angular/SettingController.js" type="text/javascript"></script>
+            <script src="../js/own/util.js" type="text/javascript"></script>
+    </body>
+</html>

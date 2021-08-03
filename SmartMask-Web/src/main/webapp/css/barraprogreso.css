@@ -1,0 +1,80 @@
+.circular-progress{
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+    margin: auto;
+    background: linear-gradient(0deg, #acacac 50%, #233264 50%);
+    position: relative;
+    transform: rotate(90deg);
+}
+.circular-progress:before{
+   width: 12rem;
+   height: 12rem; 
+   content: "Porcentaje";
+   position: absolute;
+   top: 0;
+   left: 0;
+   background: #fff content-box;
+   border-radius: 50%;
+   padding: .5em;
+   box-sizing: border-box;
+   font-size: 2rem;
+   color: #233264;
+   text-align: center;
+   line-height: 8rem;
+   transform: rotate(-90deg);
+}
+.circular-progress:after{
+    content: "50%";
+    width: 12rem;
+   height: 12rem;
+   position: absolute;
+   top: 0;
+   left: 0;
+   border-radius: 50%;
+   background: linear-gradient(transparent 50%, #fff 50%);
+   transform: scale(1.1) rotate(-90deg);
+   text-align: center;
+   color: #233264;
+   line-height: 13rem; 
+}
+.circular-progress1{
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+    margin: auto;
+    background: linear-gradient(0deg, #acacac 50%, #233264 50%);
+    position: relative;
+    transform: rotate(70deg);
+}
+.circular-progress1:before{
+   width: 12rem;
+   height: 12rem; 
+   content: "Porcentaje";
+   position: absolute;
+   top: 0;
+   left: 0;
+   background: #fff content-box;
+   border-radius: 50%;
+   padding: .5em;
+   box-sizing: border-box;
+   font-size: 2rem;
+   color: #233264;
+   text-align: center;
+   line-height: 8rem;
+   transform: rotate(-70deg);
+}
+.circular-progress1:after{
+   content: "40%";
+    width: 12rem;
+   height: 12rem;
+   position: absolute;
+   top: 0;
+   left: 0;
+   border-radius: 50%;
+   background: linear-gradient(transparent 50%, #fff 50%);
+   transform: scale(1.1) rotate(-70deg);
+   text-align: center;
+   color: #233264;
+   line-height: 13rem; 
+}

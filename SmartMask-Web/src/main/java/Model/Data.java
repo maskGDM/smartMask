@@ -1,0 +1,241 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Model;
+
+import java.util.Date;
+import org.json.JSONObject;
+import org.json.XML;
+
+/**
+ * This model class contains the attributes and methods of Data
+ * @author geova
+ */
+public class Data {
+
+    int data_id;
+    Date editdate;
+    int user_informationid;
+    Double maxvalueco2;
+    Double minvalueco2;
+    Double maxvalueco;
+    Double minvalueco;
+    Double maxvaluec4h10;
+    Double mainvaluec4h10;
+    String xml;
+    String json;
+/**
+ * Default construction method
+ */
+    public Data() {
+    }
+/**
+ * Parameterized construction method
+ * 
+ * @param data_id Identification of data
+ * @param editdate date of edition
+ * @param user_informationid Identification of user
+ * @param maxvalueco2 maximum carbon dioxide value
+ * @param minvalueco2 minimum carbon dioxide value
+ * @param maxvalueco maximum carbon monoxide value
+ * @param minvalueco minimum carbon monoxide value
+ * @param maxvaluec4h10 maximum Butane value
+ * @param mainvaluec4h10  minimum Butane value
+ */
+    public Data(int data_id, Date editdate, int user_informationid, Double maxvalueco2, Double minvalueco2, Double maxvalueco, Double minvalueco, Double maxvaluec4h10, Double mainvaluec4h10) {
+        this.data_id = data_id;
+        this.editdate = editdate;
+        this.user_informationid = user_informationid;
+        this.maxvalueco2 = maxvalueco2;
+        this.minvalueco2 = minvalueco2;
+        this.maxvalueco = maxvalueco;
+        this.minvalueco = minvalueco;
+        this.maxvaluec4h10 = maxvaluec4h10;
+        this.mainvaluec4h10 = mainvaluec4h10;
+    }
+/**
+ * Parameterized construction method
+ * 
+ * @param editdate date of edition
+ * @param user_informationid Identification of user
+ * @param maxvalueco2 maximum carbon dioxide value
+ * @param minvalueco2 minimum carbon dioxide value
+ * @param maxvalueco maximum carbon monoxide value
+ * @param minvalueco minimum carbon monoxide value
+ * @param maxvaluec4h10 maximum Butane value
+ * @param mainvaluec4h10 minimum Butane value
+ */
+    public Data(Date editdate, int user_informationid, Double maxvalueco2, Double minvalueco2, Double maxvalueco, Double minvalueco, Double maxvaluec4h10, Double mainvaluec4h10) {
+        this.editdate = editdate;
+        this.user_informationid = user_informationid;
+        this.maxvalueco2 = maxvalueco2;
+        this.minvalueco2 = minvalueco2;
+        this.maxvalueco = maxvalueco;
+        this.minvalueco = minvalueco;
+        this.maxvaluec4h10 = maxvaluec4h10;
+        this.mainvaluec4h10 = mainvaluec4h10;
+    }
+/**
+ *  Method for obtaining the Identification of data
+ * @return 
+ */
+    public int getData_id() {
+        return data_id;
+    }
+/**
+ * Set the identifier of data
+ * @param data_id 
+ */
+    public void setData_id(int data_id) {
+        this.data_id = data_id;
+    }
+/**
+ *  Method for obtaining the edit date
+ * @return 
+ */
+    public Date getEditdate() {
+        return editdate;
+    }
+/**
+ * Set the edit date
+ * @param editdate 
+ */
+    public void setEditdate(Date editdate) {
+        this.editdate = editdate;
+    }
+/**
+ *  Method for obtaining the Identification of user
+ * @return 
+ */
+    public int getUser_informationid() {
+        return user_informationid;
+    }
+/**
+ * 
+ * Set the identifier of user
+ * @param user_informationid 
+ */
+    public void setUser_informationid(int user_informationid) {
+        this.user_informationid = user_informationid;
+    }
+/**
+ *  Method for obtaining the maximum carbon dioxide value
+ * @return 
+ */
+    public Double getMaxvalueco2() {
+        return maxvalueco2;
+    }
+/**
+ * Set the maximum carbon dioxide value
+ * @param maxvalueco2 
+ */
+    public void setMaxvalueco2(Double maxvalueco2) {
+        this.maxvalueco2 = maxvalueco2;
+    }
+/**
+ * Method for obtaining the minimum carbon dioxide value
+ * @return 
+ */
+    public Double getMinvalueco2() {
+        return minvalueco2;
+    }
+/**
+ * Set the minimum carbon dioxide value
+ * @param minvalueco2 
+ */
+    public void setMinvalueco2(Double minvalueco2) {
+        this.minvalueco2 = minvalueco2;
+    }
+/**
+ * Method for obtaining the maximum carbon monoxide value
+ * @return 
+ */
+    public Double getMaxvalueco() {
+        return maxvalueco;
+    }
+/**
+ *  set the maximum carbon monoxide value
+ * @param maxvalueco 
+ */
+    public void setMaxvalueco(Double maxvalueco) {
+        this.maxvalueco = maxvalueco;
+    }
+/**
+ * Method for obtaining the minimum carbon monoxide value
+ * @return 
+ */
+    public Double getMinvalueco() {
+        return minvalueco;
+    }
+/**
+ *  set the minimum carbon monoxide value
+ * @param minvalueco 
+ */
+    public void setMinvalueco(Double minvalueco) {
+        this.minvalueco = minvalueco;
+    }
+/**
+ * Method for obtaining the maximum Butane value
+ * @return 
+ */
+    public Double getMaxvaluec4h10() {
+        return maxvaluec4h10;
+    }
+/**
+ * set the maximum Butane value
+ * @param maxvaluec4h10 
+ */
+    public void setMaxvaluec4h10(Double maxvaluec4h10) {
+        this.maxvaluec4h10 = maxvaluec4h10;
+    }
+/**
+ * Method for obtaining the  minimum Butane value
+ * @return 
+ */
+    public Double getMainvaluec4h10() {
+        return mainvaluec4h10;
+    }
+/**
+ * set the  minimum Butane value
+ * @param mainvaluec4h10 
+ */
+    public void setMainvaluec4h10(Double mainvaluec4h10) {
+        this.mainvaluec4h10 = mainvaluec4h10;
+    }
+/**
+ * Method to obtain a xml with the information of data
+ * @return 
+ */
+    public String getXml() {
+        return xml;
+    }
+/**
+ * Set up a xml with the information of data
+ * @param xml 
+ */
+    public void setXml(String xml) {
+        this.xml = xml;
+    }
+
+    public String getJson2Xml() {
+        JSONObject jsonU = new JSONObject(this.json);
+        return this.xml = XML.toString(jsonU);
+    }
+/**
+ * Method to obtain a json with the information of data
+ * @return 
+ */
+    public String getJson() {
+        return json;
+    }
+/**
+ * Set up a json with the information of data
+ * @param json 
+ */
+    public void setJson(String json) {
+        this.json = json;
+    }
+
+}
