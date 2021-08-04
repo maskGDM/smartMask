@@ -2,18 +2,21 @@ package com.example.smartmask;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Profile1 extends AppCompatActivity {
     String jsonDataUser = "{}";
     TextView txtNombre, txtUser, txtApellido,txtCorreo;
-    ImageView imgUser;
+    CircleImageView imgUser;
     TextView aux;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +24,7 @@ public class Profile1 extends AppCompatActivity {
         setContentView(R.layout.activity_profile1);
         Bundle bundle = this.getIntent().getExtras();
         String result=getIntent().getExtras().getString("Session");
-        System.out.println("valor "+result);
+          System.out.println("valor "+result);
         jsonDataUser = (result);
         Log.i("Logs", "SMART MASK");
         if (!jsonDataUser.equals("")) {
@@ -37,15 +40,12 @@ public class Profile1 extends AppCompatActivity {
     }
 
     public void initialize() {
-
         txtNombre = findViewById(R.id.txtMyNombre1);
         txtUser = findViewById(R.id.txtMyUser1);
         txtApellido = findViewById(R.id.txtMyApellido1);
         txtCorreo=findViewById(R.id.txtMyCorreo1);
         aux=findViewById(R.id.asad);
-
-        //    imgUser=view.findViewById(R.id.imgUser);
-
+        imgUser=findViewById(R.id.imgUser);
     }
 
     public void initdata() {
@@ -60,6 +60,14 @@ public class Profile1 extends AppCompatActivity {
             txtUser.setText(jsonObject.get("user").toString());
             txtApellido.setText(jsonObject.get("lastnames").toString());
             txtCorreo.setText(jsonObject.get("email").toString());
+            String  imgURL= jsonObject.get("imguser").toString();
+//            Uri img=new Uri();
+
+//            System.out.println("FOTO  "+imgURL);
+//            imgUser.setImageURI(Uri.parse(imgURL));
+            Picasso.get().load("https://thumbs.dreamstime.com/b/vector-de-usuario-redes-sociales-perfil-avatar-predeterminado-retrato-vectorial-del-176194876.jpg")
+                    .resize(100,100)
+                    .centerCrop().into(imgUser);
         } else {
 
 //            Toast.makeText(ProfileFragment, "Error", Toast.LENGTH_SHORT).show();
