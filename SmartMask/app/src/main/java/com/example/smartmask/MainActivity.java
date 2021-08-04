@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         JsonArray jsonArray = jsonObject.get("data").getAsJsonArray();
                         try {
                             JsonObject jsonObjectUser = jsonArray.get(0).getAsJsonObject();
-                            Intent intent = new Intent(MainActivity.this, Dashboard.class);
+                            Intent intent = new Intent(MainActivity.this, Menu.class);
                             Bundle b = new Bundle();
                             b.putString("Session", jsonObjectUser.toString());
                             intent.putExtras(b);

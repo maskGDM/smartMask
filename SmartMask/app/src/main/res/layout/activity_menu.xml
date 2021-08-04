@@ -43,7 +43,7 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/camera"
+                android:id="@+id/btnProfile"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
@@ -51,6 +51,7 @@
                 android:elevation="0dp"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="Profile"
                 app:cardBackgroundColor="#fffffa"
                 app:cardCornerRadius="20dp">
 
@@ -77,7 +78,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/diccionario"
+                android:id="@+id/btnSettings"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
@@ -85,6 +86,7 @@
                 android:elevation="0dp"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="Settings"
                 app:cardBackgroundColor="#fffffa"
                 app:cardCornerRadius="20dp">
 
