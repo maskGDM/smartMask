@@ -180,13 +180,14 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/teclado"
+                android:id="@+id/btnReportAir"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
                 android:clickable="true"
                 android:elevation="0dp"
                 android:focusable="true"
+                android:onClick="AirQualityTable"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardBackgroundColor="#fffffa"
                 app:cardCornerRadius="20dp">
