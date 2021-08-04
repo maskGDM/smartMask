@@ -17,6 +17,7 @@ public class Menu extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         profile=findViewById(R.id.btnProfile);
         settings=findViewById(R.id.btnSettings);
+        options=findViewById(R.id.btnOptions);
     }
     public void Profile(View view){
         Intent intent=new Intent(Menu.this, Profile.class);
@@ -26,6 +27,12 @@ public class Menu extends AppCompatActivity {
     }
     public void Settings(View view){
         Intent intent=new Intent(Menu.this, Settings.class);
+        Bundle b=new Bundle();
+        intent.putExtras(b);
+        startActivity(intent);
+    }
+    public void Options(View view){
+        Intent intent=new Intent(Menu.this, Options.class);
         Bundle b=new Bundle();
         intent.putExtras(b);
         startActivity(intent);
