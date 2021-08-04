@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.smartmask">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -10,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartMask">
-        <activity android:name=".ConfigureValues"></activity>
+        <activity android:name=".Profile"></activity>
+        <activity android:name=".Menu" />
+        <activity android:name=".ConfigureValues" />
         <activity android:name=".ModalInformation" />
         <activity android:name=".Dashboard" />
         <activity android:name=".RegisterActivity" />
