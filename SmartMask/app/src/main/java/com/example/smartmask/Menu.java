@@ -17,14 +17,14 @@ public class Menu extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         profile=findViewById(R.id.btnProfile);
         settings=findViewById(R.id.btnSettings);
-<<<<<<< Updated upstream
+
         options=findViewById(R.id.btnOptions);
-=======
+
         jsonDataUser=getIntent().getExtras().getString("Session");
->>>>>>> Stashed changes
+
     }
     public void Profile(View view){
-        Intent intent=new Intent(Menu.this, Profile.class);
+        Intent intent=new Intent(Menu.this, Profile1.class);
         //Bundle b=new Bundle();
         intent.putExtra("Session",jsonDataUser);
         //intent.putExtras(b);
