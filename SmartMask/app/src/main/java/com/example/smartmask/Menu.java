@@ -42,4 +42,10 @@ public class Menu extends AppCompatActivity {
         intent.putExtras(b);
         startActivity(intent);
     }
+    public void AirQuality(View view){
+        Intent intent=new Intent(Menu.this, AirQuiality.class);
+        Bundle b=new Bundle();
+        intent.putExtras(b);
+        startActivity(intent);
+    }
 }
