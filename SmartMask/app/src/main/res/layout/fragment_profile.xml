@@ -12,6 +12,7 @@
         android:layout_height="200dp"
         android:background="@drawable/top_background"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,11 +41,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgUser"
         android:layout_width="200dp"
         android:layout_height="100dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/ic_profile" />
@@ -54,17 +56,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="16dp"
         android:text="In this part you can edit your personal information"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imgUser" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/txtNombre"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
@@ -72,7 +75,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
-        android:hint="Dayanna Velez"
+        android:hint="Dayanna Lizzet"
         android:inputType="textPersonName"
         android:paddingStart="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
-        android:id="@+id/user"
+        android:id="@+id/txtUser"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
@@ -93,10 +96,10 @@
         android:paddingStart="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
 
     <EditText
-        android:id="@+id/txtPass2"
+        android:id="@+id/txtApellido"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
@@ -104,19 +107,19 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
-        android:hint="123456"
+        android:hint="Velez Araujo"
         android:inputType="textPassword"
         android:paddingStart="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user" />
+        app:layout_constraintTop_toBottomOf="@+id/txtUser" />
 
     <Button
         android:id="@+id/btnEdit"
         android:layout_width="0dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/backgrund_bottom"
         android:text="Edit"
@@ -124,25 +127,14 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPass2" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCorreo" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="In this part you can you add a new mask."
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEdit" />
+
 
     <EditText
-        android:id="@+id/txtMac"
+        android:id="@+id/txtCorreo"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
@@ -150,41 +142,24 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
-        android:hint="00:1B:44:11:3A:B7"
+        android:hint="dayanna.velez@uteq.edu.ec"
         android:inputType="textPersonName"
         android:paddingStart="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="0dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/backgrund_bottom"
-        android:text="ADD"
-        android:textColor="#003249"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMac" />
+        app:layout_constraintTop_toBottomOf="@+id/txtApellido" />
 
     <Button
         android:id="@+id/btnLogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="LOG OUT"
         android:textAlignment="center"
         android:textColor="#003249"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
+        tools:layout_editor_absoluteY="614dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         btn_register = findViewById(R.id.btn_register);
         btn_recover = findViewById(R.id.btn_recover);
-
         requestQueue = Volley.newRequestQueue(this);
         OnClickListener();
     }
@@ -54,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
             Log.i("Logs", jsonLogin);
             stringRequestVolley(jsonLogin);
         });
-        
     }
     public void Login(View view){
         Intent intent=new Intent(MainActivity.this, RegisterActivity.class);
@@ -78,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                         JsonArray jsonArray = jsonObject.get("data").getAsJsonArray();
                         try {
                             JsonObject jsonObjectUser = jsonArray.get(0).getAsJsonObject();
-
                             Intent intent = new Intent(MainActivity.this, Dashboard.class);
                             Bundle b = new Bundle();
                             b.putString("Session", jsonObjectUser.toString());
@@ -120,4 +117,3 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(request);
     }
 }
-
