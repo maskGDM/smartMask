@@ -41,7 +41,15 @@ public class MainActivity extends AppCompatActivity {
         btn_register = findViewById(R.id.btn_register);
         btn_recover = findViewById(R.id.btn_recover);
         requestQueue = Volley.newRequestQueue(this);
-        OnClickListener();
+        //OnClickListener();
+        btn_login.setOnClickListener(v -> {
+            String jsonLogin = "{\n" +
+                    "    \"user\": \"" + et_mail.getText().toString() + "\",\n" +
+                    "    \"pass\": \"" + et_pass.getText().toString() + "\"\n" +
+                    "}";
+            Log.i("Logs", jsonLogin);
+            stringRequestVolley(jsonLogin);
+        });
     }
 
     private void OnClickListener() {
@@ -57,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     public void Login(View view){
         Intent intent=new Intent(MainActivity.this, RegisterActivity.class);
         Bundle b=new Bundle();
+
         intent.putExtras(b);
         startActivity(intent);
     }
@@ -78,8 +87,9 @@ public class MainActivity extends AppCompatActivity {
                             JsonObject jsonObjectUser = jsonArray.get(0).getAsJsonObject();
                             Intent intent = new Intent(MainActivity.this, Menu.class);
                             Bundle b = new Bundle();
-                            b.putString("Session", jsonObjectUser.toString());
-                            intent.putExtras(b);
+                            intent.putExtra("Session",jsonObjectUser.toString());
+                           // b.putString("Session", jsonObjectUser.toString());
+                           // intent.putExtras(b);
                             startActivity(intent);
 
                         } catch (Exception e) {

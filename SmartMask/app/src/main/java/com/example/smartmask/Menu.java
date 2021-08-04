@@ -9,7 +9,7 @@ import android.view.View;
 
 public class Menu extends AppCompatActivity {
     CardView profile,settings,options,report;
-
+    String jsonDataUser ="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,12 +17,17 @@ public class Menu extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         profile=findViewById(R.id.btnProfile);
         settings=findViewById(R.id.btnSettings);
+<<<<<<< Updated upstream
         options=findViewById(R.id.btnOptions);
+=======
+        jsonDataUser=getIntent().getExtras().getString("Session");
+>>>>>>> Stashed changes
     }
     public void Profile(View view){
         Intent intent=new Intent(Menu.this, Profile.class);
-        Bundle b=new Bundle();
-        intent.putExtras(b);
+        //Bundle b=new Bundle();
+        intent.putExtra("Session",jsonDataUser);
+        //intent.putExtras(b);
         startActivity(intent);
     }
     public void Settings(View view){
