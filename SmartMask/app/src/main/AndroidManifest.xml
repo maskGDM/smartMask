@@ -16,7 +16,6 @@
         <activity android:name=".Menu" />
         <activity android:name=".ConfigureValues" />
         <activity android:name=".ModalInformation" />
-        <activity android:name=".Dashboard" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
