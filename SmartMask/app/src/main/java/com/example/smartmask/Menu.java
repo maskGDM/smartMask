@@ -12,11 +12,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class Menu extends AppCompatActivity {
-    private CardView profile,settings,options,report,btnReportAir, logoff;
+    private CardView profile,settings,options,report,btnReportAir;
     String jsonDataUser ="";
+    private ImageView logoff;
 
     //session
     private String user_informationid,user,names,lastnames,email,imguser,birthdaydate;
@@ -49,7 +51,8 @@ public class Menu extends AppCompatActivity {
         settings=findViewById(R.id.btnSettings);
         btnReportAir = findViewById(R.id.btnReportAir);
         options=findViewById(R.id.btnOptions);
-        logoff = findViewById(R.id.btnlog_off);
+        //logoff = findViewById(R.id.btnlog_off);
+        logoff=findViewById(R.id.btnSalir);
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
     }
     public void sessionuser(){
