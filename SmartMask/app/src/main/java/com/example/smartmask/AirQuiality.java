@@ -21,16 +21,17 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import java.util.ArrayList;
 
 public class AirQuiality extends AppCompatActivity {
-    BarChart barChart;
-    String []meses=new String[] {"enero","febrero","marzo","abril","mayo"};
-    int []ventas=new int[]{25,100,134,156};
+    private BarChart barChart;
+
+    String []meses=new String[] {"ppminternal","ppmexternal","pressure","temperature","humidity"};
+    int []ventas=new int[]{359,300,108,21,71};
     int []color=new int[]{Color.BLUE,Color.CYAN,Color.GREEN,Color.MAGENTA,Color.RED};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_air_quiality);
-        barChart=findViewById(R.id.linearChar);
+        barChart=(BarChart) findViewById(R.id.barChart);
         createCharts();
     }
     private Chart getSameChart(Chart chart,String description,int txtColor,int background,int animateY){
@@ -38,7 +39,7 @@ public class AirQuiality extends AppCompatActivity {
         chart.getDescription().setTextSize(15);
         chart.setDrawingCacheBackgroundColor(background);
         chart.animateY(animateY);
-
+        legend(chart);
         return chart;
     }
     private void legend(Chart chart){
@@ -77,10 +78,12 @@ public class AirQuiality extends AppCompatActivity {
         axis.setEnabled(false);
     }
     private void createCharts(){
-        barChart=(BarChart)getSameChart(barChart,"Series",Color.BLUE,Color.CYAN,3000);
+        barChart=(BarChart) getSameChart(barChart,"Series",Color.BLUE,Color.CYAN,3000);
         barChart.setDrawGridBackground(true);
         barChart.setDrawBarShadow(true);
+        barChart.setData(getBarData());
 
+        barChart.invalidate();
         axisX(barChart.getXAxis());
         axisLeft(barChart.getAxisLeft());
         axisRight(barChart.getAxisRight());

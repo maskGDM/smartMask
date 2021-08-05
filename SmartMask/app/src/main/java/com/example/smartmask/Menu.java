@@ -115,7 +115,7 @@ public class Menu extends AppCompatActivity {
         startActivity(intent);
     }
     public void Options(View view){
-        Intent intent=new Intent(Menu.this, Options.class);
+        Intent intent=new Intent(Menu.this, AirQuiality.class);
         Bundle b=new Bundle();
         intent.putExtras(b);
         startActivity(intent);
