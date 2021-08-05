@@ -5,6 +5,8 @@ import androidx.cardview.widget.CardView;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,30 +39,66 @@ public class AirQualityTable extends AppCompatActivity {
     String jsonDataUser = "{}";
     RequestQueue requestQueue;
     String URL = "https://aplicaciones.uteq.edu.ec/smartmask/webapis/";
+    //session
+    private String user_informationid,user,names,lastnames,email,imguser,birthdaydate;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_air_quality_table);
-        String result=getIntent().getExtras().getString("Session");
-        System.out.println("valor "+result);
-        jsonDataUser = (result);
-        JsonParser jsonParser = new JsonParser();
-        JsonObject jsonObject = jsonParser.parse(jsonDataUser).getAsJsonObject();
-        requestQueue = Volley.newRequestQueue(this);
-        String jsonLogin = "{\n" +
-                "    \"id_usuario\":\"" + jsonObject.get("user_informationid").toString() +"\"\n" +
-                "}";
-        Log.i("Logs", jsonLogin);
-        stringRequestVolley(jsonLogin);
+        init();
+        sessionuser();
+        //String result=getIntent().getExtras().getString("Session");
+        //System.out.println("valor "+result);
+        //jsonDataUser = (result);
+       // JsonParser jsonParser = new JsonParser();
+       // JsonObject jsonObject = jsonParser.parse(jsonDataUser).getAsJsonObject();
+        if (user_informationid!=null && email != null) {
+            Log.i("User", email);
+            requestQueue = Volley.newRequestQueue(this);
+            String jsonLogin = "{\n" +
+                    "    \"id_usuario\":\"" + user_informationid +"\"\n" +
+                    "}";
+            Log.i("Logs", jsonLogin);
+            stringRequestVolley(jsonLogin);
 
-        initDatePicker();
-        txtFechaInicio=findViewById(R.id.txtFechaInicio);
-        txtFechaFin=findViewById(R.id.txtFechaFin);
+            initDatePicker();
 
-        txtFechaInicio.setText(getTodayDate());
+        } else {
+            Toast.makeText(AirQualityTable.this, "No session", Toast.LENGTH_LONG).show();
+            gologin();
+        }
 
 }
+    private void init(){
+        txtFechaInicio=findViewById(R.id.txtFechaInicio);
+        txtFechaFin=findViewById(R.id.txtFechaFin);
+        txtFechaInicio.setText(getTodayDate());
+        preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+    }
+    private void gologin() {
+        Intent i = new Intent(this, MainActivity.class);
+        // bandera para que no se creen nuevas actividades innecesarias
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+    }
+    private void logoff(){
+        preferences.edit().clear().apply();
+        gologin();
+        Toast.makeText(AirQualityTable.this, "Closed session", Toast.LENGTH_LONG).show();
+    }
+    public void sessionuser(){
+        user_informationid = preferences.getString("user_informationid",null);
+        user= preferences.getString("user",null);
+        names= preferences.getString("names",null);
+        lastnames= preferences.getString("lastnames",null);
+        email= preferences.getString("email",null);
+        imguser= preferences.getString("imguser",null);
+        birthdaydate= preferences.getString("birthdaydate",null);
+    }
     private String getTodayDate(){
         Calendar cal= Calendar.getInstance();
         int year=cal.get(Calendar.YEAR);
