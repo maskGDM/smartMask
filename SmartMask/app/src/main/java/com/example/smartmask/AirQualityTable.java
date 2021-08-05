@@ -59,7 +59,7 @@ public class AirQualityTable extends AppCompatActivity {
         txtFechaFin=findViewById(R.id.txtFechaFin);
 
         txtFechaInicio.setText(getTodayDate());
-        
+
 }
     private String getTodayDate(){
         Calendar cal= Calendar.getInstance();
@@ -75,8 +75,8 @@ public class AirQualityTable extends AppCompatActivity {
                 month=month+1;
                 String date=makeDateString(day,month,year);
                 String finaldate=makeDateStringFinish(day,month,year);
-                //txtFechaInicio.setText(date);
-                //txtFechaFin.setText(finaldate);
+                txtFechaInicio.setText(date);
+                txtFechaFin.setText(finaldate);
             }
         };
         Calendar cal= Calendar.getInstance();
