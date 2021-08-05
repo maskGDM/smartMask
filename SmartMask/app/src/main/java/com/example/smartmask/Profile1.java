@@ -33,7 +33,7 @@ public class Profile1 extends AppCompatActivity {
         Log.i("Logs", "SMART MASK");
         if (user_informationid!=null && email != null) {
             Log.i("User", email);
-            initdata();
+            dataupdate();
 
         } else {
             Toast.makeText(Profile1.this, "No session", Toast.LENGTH_LONG).show();
@@ -73,6 +73,20 @@ public class Profile1 extends AppCompatActivity {
         gologin();
         Toast.makeText(Profile1.this, "Closed session", Toast.LENGTH_LONG).show();
     }
+    public void dataupdate() {
+        System.out.println(imguser);
+            txtNombre.setText(names);
+            txtUser.setText(user);
+            txtApellido.setText(lastnames);
+            txtCorreo.setText(email);
+
+        Picasso.get()
+                .load(imguser.replace('\\', '/'))
+                .error(R.mipmap.ic_launcher)
+                .resize(292,264)
+                .centerCrop()
+                .into(imgUser);
+        }
 
     public void initdata() {
         JsonParser jsonParser = new JsonParser();
