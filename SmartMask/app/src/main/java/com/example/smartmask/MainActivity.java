@@ -86,23 +86,23 @@ public class MainActivity extends AppCompatActivity {
                         JsonArray jsonArray = jsonObject.get("data").getAsJsonArray();
                         try {
                             JsonObject jsonObjectUser = jsonArray.get(0).getAsJsonObject();
-                            SharedPreferences.Editor editor = preferences.edit();
-                            editor.putString("user_informationid",jsonObjectUser.get("user_informationid").toString());
-                            editor.putString("user",jsonObjectUser.get("user").toString());
-                            editor.putString("names",jsonObjectUser.get("names").toString());
-                            editor.putString("lastnames",jsonObjectUser.get("lastnames").toString());
-                            editor.putString("email",jsonObjectUser.get("email").toString());
-                            editor.putString("imguser",jsonObjectUser.get("imguser").toString());
-                            editor.putString("birthdaydate",jsonObjectUser.get("birthdaydate").toString());
-                            editor.commit();
-                            // redirecciona al menu
-                            goMenu();
-                           // Bundle b = new Bundle();
-                            // intent.putExtra("Session",jsonObjectUser.toString());
-                           // b.putString("Session", jsonObjectUser.toString());
-                           // intent.putExtras(b);
+                            if(jsonObjectUser.size() != 0){
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.putString("user_informationid",jsonObjectUser.get("user_informationid").toString());
+                                editor.putString("user",jsonObjectUser.get("user").toString());
+                                editor.putString("names",jsonObjectUser.get("names").toString());
+                                editor.putString("lastnames",jsonObjectUser.get("lastnames").toString());
+                                editor.putString("email",jsonObjectUser.get("email").toString());
+                                editor.putString("imguser",jsonObjectUser.get("imguser").toString());
+                                editor.putString("birthdaydate",jsonObjectUser.get("birthdaydate").toString());
+                                editor.commit();
+                                // redirecciona al menu
+                                goMenu();
+                            }else{
+                                Toast.makeText(MainActivity.this, "USUARIO O CONTRASEÑA INCORRECTO", Toast.LENGTH_LONG).show();
+                            }
                         } catch (Exception e) {
-//                            Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_LONG).show();
                         }
                     } else {
                         Toast.makeText(MainActivity.this, "USUARIO O CONTRASEÑA INCORRECTO", Toast.LENGTH_LONG).show();

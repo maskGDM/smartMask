@@ -2,8 +2,13 @@ package com.example.smartmask;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
@@ -31,6 +36,7 @@ public class AirQuiality extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_air_quiality);
+        showpopupersonalized();
         barChart=(BarChart) findViewById(R.id.barChart);
         createCharts();
     }
@@ -100,6 +106,25 @@ public class AirQuiality extends AppCompatActivity {
         BarData barData=new BarData(barDataSet);
         barData.setBarWidth(0.45f);
         return barData;
+    }
+
+    private void showpopupersonalized(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(AirQuiality.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.activity_modal_information,null);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        TextView txtclose =(TextView) dialog.findViewById(R.id.txtclose);
+        txtclose.setText("M");
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(AirQuiality.this, "Close modal", Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+            }
+        });
     }
 
 
