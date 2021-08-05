@@ -24,7 +24,7 @@ public class Profile1 extends AppCompatActivity {
         setContentView(R.layout.activity_profile1);
         Bundle bundle = this.getIntent().getExtras();
         String result=getIntent().getExtras().getString("Session");
-          System.out.println("valor "+result);
+        System.out.println("valor "+result);
         jsonDataUser = (result);
         Log.i("Logs", "SMART MASK");
         if (!jsonDataUser.equals("")) {
