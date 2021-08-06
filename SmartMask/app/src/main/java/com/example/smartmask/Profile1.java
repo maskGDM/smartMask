@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,8 +21,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Profile1 extends AppCompatActivity {
     String jsonDataUser = "{}";
     private TextView txtNombre, txtUser, txtApellido,txtCorreo;
-    private CircleImageView imgUser;
+    private ImageView imgUser;
     private TextView aux;
+    private Button btnEdit;
     //session
     private String user_informationid,user,names,lastnames,email,imguser,birthdaydate;
     private SharedPreferences preferences;
@@ -34,6 +37,23 @@ public class Profile1 extends AppCompatActivity {
         if (user_informationid!=null && email != null) {
             Log.i("User", email);
             dataupdate();
+            btnEdit.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    if(txtNombre !=null && txtApellido !=null){
+                        String jsondata = "{\n" +
+                                "    \"names\":\"" + txtNombre.getText() +"\"\n" +
+                                "    \"user\":\"" + txtUser.getText() +"\"\n" +
+                                "    \"lastnames\":\"" + txtApellido.getText() +"\"\n" +
+                                "    \"email\":\"" + txtCorreo.getText() +"\"\n" +
+                                "}";
+                        Log.i("Logs", jsondata);
+                    }else{
+                        Toast.makeText(Profile1.this, "Empty fields", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
 
         } else {
             Toast.makeText(Profile1.this, "No session", Toast.LENGTH_LONG).show();
@@ -66,6 +86,7 @@ public class Profile1 extends AppCompatActivity {
         txtCorreo=findViewById(R.id.txtMyCorreo1);
         aux=findViewById(R.id.asad);
         imgUser=findViewById(R.id.imgUser);
+        btnEdit = findViewById(R.id.btnEdit);
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
     }
     private void logoff(){
