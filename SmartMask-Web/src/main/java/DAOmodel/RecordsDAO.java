@@ -46,6 +46,19 @@ public class RecordsDAO implements RecordsCrud {
         }
     }
 
+    public String[] listRecordsInterval(String type_query, String id_user, String stardate, String enddate) {
+        String query = String.format("select * from listrecordsinterval('%s', %s, '%s', '%s')", type_query, id_user, stardate, enddate);
+        System.out.println(query);
+        DefaultTableModel tab = conex.returnRecord(query);
+        if (tab.getRowCount() > 0) {
+            return new String[]{
+                tab.getValueAt(0, 0).toString(),
+                tab.getValueAt(0, 1).toString()};
+        } else {
+            return new String[]{"4", ""};
+        }
+    }
+
     @Override
     public boolean editRecords(Records records) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

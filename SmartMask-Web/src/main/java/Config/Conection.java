@@ -14,8 +14,8 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Usuario
- * In this class, the necessary methods for connecting, obtaining and sending data to the database are carried out.
+ * @author Usuario In this class, the necessary methods for connecting,
+ * obtaining and sending data to the database are carried out.
  */
 public class Conection {
 
@@ -24,17 +24,22 @@ public class Conection {
     ResultSet result;
     ResultSetMetaData rsmd;
     java.sql.Statement st;
+    WeEncoder weEncoder;
 
     public Conection() {
 
     }
-    /** Method for opening connection
+
+    /**
+     * Method for opening connection
+     *
      * @return Return a Boolean.
      */
     public boolean openConecction() {
         try {
+            weEncoder = new WeEncoder();
             Class.forName("org.postgresql.Driver");
-            conex = DriverManager.getConnection("jdbc:postgresql://" + AuxStatic.dbHost + ":" + AuxStatic.dbPort + "/" + AuxStatic.dbName, AuxStatic.dbUser, AuxStatic.dbPassword);
+            conex = DriverManager.getConnection("jdbc:postgresql://" + weEncoder.textDecryptor(AuxStatic.dbHost) + ":" + weEncoder.textDecryptor(AuxStatic.dbPort) + "/" + weEncoder.textDecryptor(AuxStatic.dbName), weEncoder.textDecryptor(AuxStatic.dbUser), weEncoder.textDecryptor(AuxStatic.dbPassword));
         } catch (Exception exc) {
             System.out.println("No connection");
             System.out.println(exc.getMessage());
@@ -42,7 +47,10 @@ public class Conection {
         }
         return true;
     }
-    /** This method closes the connection
+
+    /**
+     * This method closes the connection
+     *
      * @return Return a Boolean.
      */
     public boolean closeConnection() {
@@ -55,7 +63,10 @@ public class Conection {
         }
         return true;
     }
-    /** This method closes the ResultSet
+
+    /**
+     * This method closes the ResultSet
+     *
      * @return Return a Boolean.
      */
     public boolean closeResulSet() {
@@ -67,7 +78,10 @@ public class Conection {
         }
         return true;
     }
-    /** Receives a query and saves it in a table
+
+    /**
+     * Receives a query and saves it in a table
+     *
      * @param sentecy This String variable contains the query.
      * @return Returns a table with the data loaded from the query
      */
@@ -101,7 +115,10 @@ public class Conection {
         }
         return dataModel;
     }
-    /** This method receives a query from a function.
+
+    /**
+     * This method receives a query from a function.
+     *
      * @param sentecy This String variable, contains a query of a function.
      * @return Return a Boolean.
      */
@@ -120,7 +137,10 @@ public class Conection {
             return false;
         }
     }
-    /** Method to run an update on the database.
+
+    /**
+     * Method to run an update on the database.
+     *
      * @param sentecy This String variable, contains a query of a function.
      * @return an integer, amount of updates.
      */
@@ -140,8 +160,12 @@ public class Conection {
         }
         return counts;
     }
-    /** Execute any sentence in the database.
-     * @param sentecy this variable contains the sentence that will be executed in the database
+
+    /**
+     * Execute any sentence in the database.
+     *
+     * @param sentecy this variable contains the sentence that will be executed
+     * in the database
      * @return the value obtained when the sentence is executed in the database.
      */
     public String fillString(String sentecy) {
@@ -164,9 +188,12 @@ public class Conection {
             };
             closeConnection();
         }
-        return a==null?"":a;
+        return a == null ? "" : a;
     }
-    /** Get the following ID
+
+    /**
+     * Get the following ID
+     *
      * @param sentecy This String variable, contains a query of a function.
      * @return a string, with the following identifier.
      */
@@ -199,7 +226,10 @@ public class Conection {
         }
         return a;
     }
-   /** Obtain data and store it in a json
+
+    /**
+     * Obtain data and store it in a json
+     *
      * @param sentency This String variable, contains a query of a function.
      * @return a string, containing json.
      */
@@ -229,7 +259,10 @@ public class Conection {
         }
         return resul;
     }
-    /** Test the connection to the database.
+
+    /**
+     * Test the connection to the database.
+     *
      * @return a Boolean
      */
     public boolean testConection() {

@@ -80,6 +80,40 @@ public class MaskApis {
                 .build();
     }
 
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    @Path("/maskRecordsInterval")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response maskRecordsInterval(String data) {
+        String message;
+        System.out.println("maskRecordsInterval()");
+        System.out.println(data);
+        JsonObject Jso = Methods.stringToJSON(data);
+        if (Jso.size() > 0) {
+//            String sessionToken = Methods.JsonToString(Jso, "user_token", "");
+//            String[] clains = Methods.getDataToJwt(sessionToken);
+
+            String id_usuario = Methods.JsonToString(Jso, "id_usuario", "");
+            String stardate = Methods.JsonToString(Jso, "stardate", "");
+            String enddate = Methods.JsonToString(Jso, "enddate", "");
+
+//            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
+//            if (res[0].equals("2")) {
+            String[] res = recordsCtrl.listRecordsInterval(id_usuario, stardate, enddate);
+            message = Methods.getJsonMessage(res[0], res[1], res[2]);
+//            } else {
+//                message = Methods.getJsonMessage("4", "Error in the request parameters.", "[]");
+//            }
+        } else {
+            message = Methods.getJsonMessage("4", "Missing data.", "[]");
+        }
+        return Response.ok(message)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+
     /*
      * ********************************************
      * logIn
@@ -103,6 +137,46 @@ public class MaskApis {
 //            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
 //            if (res[0].equals("2")) {
             String[] res = userCtrl.logIn(user, pass);
+            message = Methods.getJsonMessage(res[0], res[1], res[2]);
+//            } else {
+//                message = Methods.getJsonMessage("4", "Error in the request parameters.", "[]");
+//            }
+        } else {
+            message = Methods.getJsonMessage("4", "Missing data.", "[]");
+        }
+        return Response.ok(message)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+
+    /*
+     * ********************************************
+     * User
+     *********************************************
+     */
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    @Path("/updateUser")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateUser(String data) {
+        String message;
+        System.out.println("updateUser()");
+        System.out.println(data);
+        JsonObject Jso = Methods.stringToJSON(data);
+        if (Jso.size() > 0) {
+//            String sessionToken = Methods.JsonToString(Jso, "user_token", "");
+//            String[] clains = Methods.getDataToJwt(sessionToken);
+
+            String names = Methods.JsonToString(Jso, "names", "");
+            String lastnames = Methods.JsonToString(Jso, "lastnames", "");
+            String user = Methods.JsonToString(Jso, "user", "");
+            String userinformation_id = Methods.JsonToString(Jso, "userinformation_id", "");
+
+//            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
+//            if (res[0].equals("2")) {
+            String[] res = userCtrl.updateUser(names, lastnames, user, userinformation_id);
             message = Methods.getJsonMessage(res[0], res[1], res[2]);
 //            } else {
 //                message = Methods.getJsonMessage("4", "Error in the request parameters.", "[]");

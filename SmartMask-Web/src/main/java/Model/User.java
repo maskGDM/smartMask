@@ -10,6 +10,7 @@ import org.json.XML;
 
 /**
  * This model class contains the attributes and methods of User
+ *
  * @author User
  */
 public class User {
@@ -23,24 +24,31 @@ public class User {
     String socialnetworkcode;
     String json;
     String xml;
-/**
- * Default construction method
- */
+
+    String names;
+    String lastnames;
+    String email;
+    String imguser;
+
+    /**
+     * Default construction method
+     */
     public User() {
     }
-/**
- * Parameterized construction method
- * 
- * @param user_id Identification of user 
- * @param user
- * @param password
- * @param user_informationid Identification of user_information
- * @param socialnetworkid Identification of social network
- * @param type
- * @param socialnetworkcode
- * @param json
- * @param xml 
- */
+
+    /**
+     * Parameterized construction method
+     *
+     * @param user_id Identification of user
+     * @param user
+     * @param password
+     * @param user_informationid Identification of user_information
+     * @param socialnetworkid Identification of social network
+     * @param type
+     * @param socialnetworkcode
+     * @param json
+     * @param xml
+     */
     public User(int user_id, String user, String password, int user_informationid, int socialnetworkid, char type, String socialnetworkcode, String json, String xml) {
         this.user_id = user_id;
         this.user = user;
@@ -52,18 +60,19 @@ public class User {
         this.json = json;
         this.xml = xml;
     }
-/**
- * Parameterized construction method
- * 
- * @param user
- * @param password
- * @param user_informationid
- * @param socialnetworkid
- * @param type
- * @param socialnetworkcode
- * @param json
- * @param xml 
- */
+
+    /**
+     * Parameterized construction method
+     *
+     * @param user
+     * @param password
+     * @param user_informationid
+     * @param socialnetworkid
+     * @param type
+     * @param socialnetworkcode
+     * @param json
+     * @param xml
+     */
     public User(String user, String password, int user_informationid, int socialnetworkid, char type, String socialnetworkcode, String json, String xml) {
         this.user = user;
         this.password = password;
@@ -74,17 +83,21 @@ public class User {
         this.json = json;
         this.xml = xml;
     }
-/**
- * Method to obtain identifier of user
- * @return 
- */
+
+    /**
+     * Method to obtain identifier of user
+     *
+     * @return
+     */
     public int getUser_id() {
         return user_id;
     }
-/**
- * Set the identifier of user
- * @param user_id 
- */
+
+    /**
+     * Set the identifier of user
+     *
+     * @param user_id
+     */
     public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
@@ -92,10 +105,12 @@ public class User {
     public String getUser() {
         return user;
     }
-/**
- * Set the name of user
- * @param user 
- */
+
+    /**
+     * Set the name of user
+     *
+     * @param user
+     */
     public void setUser(String user) {
         this.user = user;
     }
@@ -103,24 +118,30 @@ public class User {
     public String getPassword() {
         return password;
     }
-/**
- * Set the password of user
- * @param password 
- */
+
+    /**
+     * Set the password of user
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
-/**
- * Method to obtain identifier of user
- * @return 
- */
+
+    /**
+     * Method to obtain identifier of user
+     *
+     * @return
+     */
     public int getUser_informationid() {
         return user_informationid;
     }
-/**
- * Set the identifier of user
- * @param user_informationid 
- */
+
+    /**
+     * Set the identifier of user
+     *
+     * @param user_informationid
+     */
     public void setUser_informationid(int user_informationid) {
         this.user_informationid = user_informationid;
     }
@@ -128,10 +149,12 @@ public class User {
     public int getSocialnetworkid() {
         return socialnetworkid;
     }
-/**
- * Set the identifier of social network
- * @param socialnetworkid 
- */
+
+    /**
+     * Set the identifier of social network
+     *
+     * @param socialnetworkid
+     */
     public void setSocialnetworkid(int socialnetworkid) {
         this.socialnetworkid = socialnetworkid;
     }
@@ -139,10 +162,12 @@ public class User {
     public char getType() {
         return type;
     }
-/**
- * Set type 
- * @param type 
- */
+
+    /**
+     * Set type
+     *
+     * @param type
+     */
     public void setType(char type) {
         this.type = type;
     }
@@ -150,31 +175,39 @@ public class User {
     public String getSocialnetworkcode() {
         return socialnetworkcode;
     }
-/**
- * Set the code of social network
- * @param socialnetworkcode 
- */
+
+    /**
+     * Set the code of social network
+     *
+     * @param socialnetworkcode
+     */
     public void setSocialnetworkcode(String socialnetworkcode) {
         this.socialnetworkcode = socialnetworkcode;
     }
-/**
- * Method to obtain a json with the information of user
- * @return 
- */
+
+    /**
+     * Method to obtain a json with the information of user
+     *
+     * @return
+     */
     public String getJson() {
         return json;
     }
-/**
- * Set up a json with the information of user
- * @param json 
- */
+
+    /**
+     * Set up a json with the information of user
+     *
+     * @param json
+     */
     public void setJson(String json) {
         this.json = json;
     }
-/**
- * Method to obtain a xml with the information of user
- * @return 
- */
+
+    /**
+     * Method to obtain a xml with the information of user
+     *
+     * @return
+     */
     public String getXml() {
         return xml;
     }
@@ -183,12 +216,50 @@ public class User {
         JSONObject jsonU = new JSONObject(this.json);
         return this.xml = XML.toString(jsonU);
     }
-/**
- * Set up a xml with the information of user
- * @param xml 
- */
+
+    /**
+     * Set up a xml with the information of user
+     *
+     * @param xml
+     */
     public void setXml(String xml) {
         this.xml = xml;
     }
 
+    public String getNames() {
+        return names;
+    }
+
+    public void setNames(String names) {
+        this.names = names;
+    }
+
+    public String getLastnames() {
+        return lastnames;
+    }
+
+    public void setLastnames(String lastnames) {
+        this.lastnames = lastnames;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getImguser() {
+        return imguser;
+    }
+
+    public void setImguser(String imguser) {
+        this.imguser = imguser;
+    }
+
+    public String returnXml() {
+        JSONObject jsonU = new JSONObject(this);
+        return "<user>" + XML.toString(jsonU) + "</user>";
+    }
 }

@@ -147,7 +147,7 @@ public class WeEncoder {
 //        System.out.println("Texto encriptado:\n" + myEncryptedText);
 //        return myEncryptedText;
 
-            String secretKey = "EasyIot-UML Diagram Tools - TDDM4IoTbs";
+            String secretKey = "@UTEQ - @ECUADOR - @INGENIERÍA EN SISTEMAS";
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
             byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
@@ -177,7 +177,7 @@ public class WeEncoder {
 //        System.out.println("Texto desencriptado:\n" + plainText);
 //        return plainText;
             Decifrar = Decifrar.replace("MmM", "+");
-            String secretKey = "EasyIot-UML Diagram Tools - TDDM4IoTbs";
+            String secretKey = "@UTEQ - @ECUADOR - @INGENIERÍA EN SISTEMAS";
             byte[] message = Base64.decodeBase64(Decifrar.getBytes("utf-8"));
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));

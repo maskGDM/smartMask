@@ -17,17 +17,33 @@ public class RecordsCtrl {
     RecordsDAO recordsDao;
 
     public RecordsCtrl() {
-        recordsDao =  new RecordsDAO();
+        recordsDao = new RecordsDAO();
     }
-    
-    
+
     public String[] listRecords(
             String id_user
     ) {
         String status = "4", message = "Error al retornar datos", data = "[]";
 
         String[] resp = recordsDao.listRecords("1", id_user);
-        
+
+        if (resp[0].equals("2")) {
+            status = resp[0];
+            data = resp[1];
+            message = "Los datos se han retornado correctamente";
+        }
+        return new String[]{status, message, data};
+    }
+
+    public String[] listRecordsInterval(
+            String id_user,
+            String stardate,
+            String enddate
+    ) {
+        String status = "4", message = "Error al retornar datos", data = "[]";
+
+        String[] resp = recordsDao.listRecordsInterval("1", id_user, stardate, enddate);
+
         if (resp[0].equals("2")) {
             status = resp[0];
             data = resp[1];
