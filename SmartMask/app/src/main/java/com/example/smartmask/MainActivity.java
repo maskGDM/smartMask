@@ -24,6 +24,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private Button btn_login;
@@ -75,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, URL + "maskapis/logIn", new com.android.volley.Response.Listener<String>() {
         @Override
             public void onResponse(String response) {
+                response= fixEncoding(response);
                 Log.i("Logs", response);
-
                 JsonParser jsonParser = new JsonParser();
                 JsonObject jsonObject = jsonParser.parse(response).getAsJsonObject();
 
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     JsonElement jsonElement = jsonObject.get("status");
                     if (jsonElement.getAsInt() == 2) {
                         JsonArray jsonArray = jsonObject.get("data").getAsJsonArray();
-                        try {
+                       try {
                             JsonObject jsonObjectUser = jsonArray.get(0).getAsJsonObject();
                             if(jsonObjectUser.size() != 0){
                                 SharedPreferences.Editor editor = preferences.edit();
@@ -119,8 +121,11 @@ public class MainActivity extends AppCompatActivity {
         }
         ) {
             @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json; charset=utf-8");
+                params.put("Accept", "application/json");
+                return params;
             }
 
             @Override
@@ -135,6 +140,18 @@ public class MainActivity extends AppCompatActivity {
         };
         requestQueue.add(request);
     }
+    public static String fixEncoding(String response) {
+        try {
+            byte[] u = response.toString().getBytes(
+                    "ISO-8859-1");
+            response = new String(u, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return response;
+    }
+
     private void init(){
         et_mail = findViewById(R.id.et_mail);
         et_pass = findViewById(R.id.et_pass);
