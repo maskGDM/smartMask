@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.mikephil.charting.charts.PieChart;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
@@ -36,6 +38,13 @@ public class AirQualityTable extends AppCompatActivity {
     private DatePickerDialog datePickerDialog,dateFinish;
     private TextView txtFechaInicio,txtFechaFin;
     private Button btnhearhregistry;
+
+    //handler
+    private Handler handler;
+    private Runnable mTicker;
+    // pastel
+
+    PieChart piechart;
 
     String jsonDataUser = "{}";
     RequestQueue requestQueue;
@@ -62,7 +71,7 @@ public class AirQualityTable extends AppCompatActivity {
             btnhearhregistry.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    if(txtFechaInicio !=null && txtFechaFin !=null){
+                    if(txtFechaInicio.getText() !=null && txtFechaFin.getText() !=null){
                         String jsonfiltrarbydate = "{\n" +
                                 "    \"id_usuario\":\"" + user_informationid +"\"\n" +
                                 "    \"stardate\":\"" + txtFechaInicio.getText() +"\"\n" +
@@ -82,6 +91,24 @@ public class AirQualityTable extends AppCompatActivity {
         }
 
 }
+    private void exec(){
+        handler= new Handler();
+        mTicker = new Runnable() {
+            @Override
+            public void run() {
+             //   grafi(); método que se llamará frecuentemente para simular el tiempo real
+                handler.postDelayed(this,1000);//se ejecutara cada 1 segundos
+            }
+        };
+        handler.postDelayed(mTicker,5000);//se ejecutara cada 5 segundos
+    }
+
+    // método para destruir el handler
+    @Override public void onDestroy ()
+    {
+        handler.removeCallbacks(mTicker);
+        super.onDestroy ();
+    }
     private void init(){
         txtFechaInicio=findViewById(R.id.txtFechaInicio);
         txtFechaFin=findViewById(R.id.txtFechaFin);
