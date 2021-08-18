@@ -66,7 +66,7 @@ public class AirQuiality extends AppCompatActivity {
     private PieChart piechart;
     // barra
     private BarChart barChart;
-    TextView txtmqgasinterno, txtmqgasexterno;
+    private TextView txtmqgasinterno, txtmqgasexterno,lblppmInternal,lblppmExternal;
    // String []meses=new String[] {"ppminternal","ppmexternal","pressure","temperature","humidity"};
    String []labels=new String[] {"pressure","temperature","altitude","humidity"};
     int []airqdata=new int[]{108,21,71,70};
@@ -84,7 +84,7 @@ public class AirQuiality extends AppCompatActivity {
         sessionuser();
 
         if (user_informationid!=null && email != null) {
-            showpopupersonalized();
+           // showpopupersonalized();
             piechart = (PieChart) findViewById(R.id.Pastelchart);
             barChart=(BarChart) findViewById(R.id.barChart);
             String datajson = "{\n" +
@@ -96,14 +96,13 @@ public class AirQuiality extends AppCompatActivity {
             Toast.makeText(AirQuiality.this, "No session", Toast.LENGTH_LONG).show();
             gologin();
         }
-
-
-
     }
 
     private void init(){
+
         txtmqgasinterno =  (TextView) findViewById(R.id.txtmqgasinterno);
         txtmqgasexterno =  (TextView) findViewById(R.id.txtmqgasexterno);
+
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
     }
 
@@ -179,7 +178,7 @@ public class AirQuiality extends AppCompatActivity {
                                         {
                                             try {
                                                 JsonObject jsonAirQuality=jsonArray.get(f).getAsJsonObject();
-                                               //   Log.d("ppminternal", jsonAirQuality.get("ppminternal").toString());
+
                                                 txtmqgasinterno.setText(jsonAirQuality.get("ppminternal").toString());
                                                 txtmqgasexterno.setText(jsonAirQuality.get("ppmexternal").toString());
                                                 pieEntries.add(new PieEntry( jsonAirQuality.get("ppminternal").getAsInt(), "ppminternal"));

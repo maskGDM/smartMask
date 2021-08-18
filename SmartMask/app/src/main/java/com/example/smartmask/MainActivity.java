@@ -90,13 +90,13 @@ public class MainActivity extends AppCompatActivity {
                             JsonObject jsonObjectUser = jsonArray.get(0).getAsJsonObject();
                             if(jsonObjectUser.size() != 0){
                                 SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("user_informationid",jsonObjectUser.get("user_informationid").toString());
-                                editor.putString("user",jsonObjectUser.get("user").toString());
-                                editor.putString("names",jsonObjectUser.get("names").toString());
-                                editor.putString("lastnames",jsonObjectUser.get("lastnames").toString());
-                                editor.putString("email",jsonObjectUser.get("email").toString());
-                                editor.putString("imguser",jsonObjectUser.get("imguser").toString());
-                                editor.putString("birthdaydate",jsonObjectUser.get("birthdaydate").toString());
+                                editor.putString("user_informationid",jsonObjectUser.get("user_informationid").toString().replace("\"", ""));
+                                editor.putString("user",jsonObjectUser.get("user").toString().replace("\"", ""));
+                                editor.putString("names",jsonObjectUser.get("names").toString().replace("\"", ""));
+                                editor.putString("lastnames",jsonObjectUser.get("lastnames").toString().replace("\"", ""));
+                                editor.putString("email",jsonObjectUser.get("email").toString().replace("\"", ""));
+                                editor.putString("imguser",jsonObjectUser.get("imguser").toString().replace("\"", ""));
+                                editor.putString("birthdaydate",jsonObjectUser.get("birthdaydate").toString().replace("\"", ""));
                                 editor.commit();
                                 // redirecciona al menu
                                 goMenu();
