@@ -33,13 +33,14 @@ public class ConfigureValues extends AppCompatActivity {
                             && Ammomin !=null && Ammomax !=null && Butanomin !=null
                             && Butanomax !=null){
                         String jsondata = "{\n" +
-                                "    \"Dioximin\":\"" + Dioximin.getText() +"\"\n" +
-                                "    \"Dioximax\":\"" + Dioximax.getText() +"\"\n" +
-                                "    \"Monomin\":\"" + Monomin.getText() +"\"\n" +
-                                "    \"Monomax\":\"" + Monomax.getText() +"\"\n" +
-                                "    \"Ammomin\":\"" + Ammomin.getText() +"\"\n" +
-                                "    \"Ammomax\":\"" + Ammomax.getText() +"\"\n" +
-                                "    \"Butanomin\":\"" + Butanomin.getText()+"\"\n" +
+                                "    \"user_informationid\":\"" + user_informationid +"\",\n" +
+                                "    \"Dioximin\":\"" + Dioximin.getText() +"\",\n" +
+                                "    \"Dioximax\":\"" + Dioximax.getText() +"\",\n" +
+                                "    \"Monomin\":\"" + Monomin.getText() +"\",\n" +
+                                "    \"Monomax\":\"" + Monomax.getText() +"\",\n" +
+                                "    \"Ammomin\":\"" + Ammomin.getText() +"\",\n" +
+                                "    \"Ammomax\":\"" + Ammomax.getText() +"\",\n" +
+                                "    \"Butanomin\":\"" + Butanomin.getText()+"\",\n" +
                                 "    \"Butanomax\":\"" + Butanomax.getText()+"\"\n" +
                                 "}";
                         Log.i("Logs", jsondata);

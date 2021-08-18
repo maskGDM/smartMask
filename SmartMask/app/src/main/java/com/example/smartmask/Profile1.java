@@ -42,9 +42,9 @@ public class Profile1 extends AppCompatActivity {
                 public void onClick(View v) {
                     if(txtNombre !=null && txtApellido !=null){
                         String jsondata = "{\n" +
-                                "    \"names\":\"" + txtNombre.getText() +"\"\n" +
-                                "    \"user\":\"" + txtUser.getText() +"\"\n" +
-                                "    \"lastnames\":\"" + txtApellido.getText() +"\"\n" +
+                                "    \"names\":\"" + txtNombre.getText() +"\",\n" +
+                                "    \"user\":\"" + txtUser.getText() +"\",\n" +
+                                "    \"lastnames\":\"" + txtApellido.getText() +"\",\n" +
                                 "    \"email\":\"" + txtCorreo.getText() +"\"\n" +
                                 "}";
                         Log.i("Logs", jsondata);

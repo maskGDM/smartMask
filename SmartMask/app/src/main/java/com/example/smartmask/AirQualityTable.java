@@ -66,7 +66,7 @@ public class AirQualityTable extends AppCompatActivity {
                     "    \"id_usuario\":\"" + user_informationid +"\"\n" +
                     "}";
             Log.i("Logs", jsonfiltrarall);
-            stringRequestVolley(jsonfiltrarall);
+            stringRequestVolley(jsonfiltrarall,"maskapis/maskRecords");
 
             btnhearhregistry.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -78,6 +78,7 @@ public class AirQualityTable extends AppCompatActivity {
                                 "    \"enddate\":\"" + txtFechaFin.getText() +"\"\n" +
                                 "}";
                         Log.i("Logs", jsonfiltrarbydate);
+                        stringRequestVolley(jsonfiltrarbydate,"maskapis/maskRecordsInterval");
                     }else{
                         Toast.makeText(AirQualityTable.this, "Empty fields", Toast.LENGTH_LONG).show();
                     }
@@ -209,8 +210,8 @@ public class AirQualityTable extends AppCompatActivity {
         dateFinish.show();
     }
 
-    private void stringRequestVolley(String json) {
-        StringRequest request = new StringRequest(Request.Method.POST, URL + "maskapis/maskRecords", new com.android.volley.Response.Listener<String>() {
+    private void stringRequestVolley(String json, String ruta) {
+        StringRequest request = new StringRequest(Request.Method.POST, URL +  ruta, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i("Logs", response);

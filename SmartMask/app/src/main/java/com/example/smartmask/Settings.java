@@ -11,7 +11,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Settings extends AppCompatActivity {
+
+    private String URL = "https://aplicaciones.uteq.edu.ec/smartmask/";
+    private RequestQueue requestQueue;
 
     private EditText txtMac;
     private Button buttonconnect, btnconfigure;
@@ -35,6 +52,7 @@ public class Settings extends AppCompatActivity {
                                 "    \"mac\":\"" + txtMac.getText() +"\"\n" +
                                 "}";
                         Log.i("Logs", jsonmac);
+                        updateUser(jsonmac);
                     }else{
                         Toast.makeText(Settings.this, "Empty fields", Toast.LENGTH_LONG).show();
                     }
@@ -83,6 +101,73 @@ public class Settings extends AppCompatActivity {
         email= preferences.getString("email",null);
         imguser= preferences.getString("imguser",null);
         birthdaydate= preferences.getString("birthdaydate",null);
+    }
+
+    private void updateUser(String datajson){
+
+        //Obtención de datos del web service utilzando Volley
+        // requestQueue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(
+                Request.Method.POST,URL+"maskapis/updateUser",
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        int size = response.length();
+                        response = fixEncoding(response);
+                        JSONObject json_transform = null;
+                        try {
+                            if (size > 0)
+                            {
+                                json_transform = new JSONObject(response);
+                                Log.e("resp", response);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error.Response", String.valueOf(error));
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json; charset=utf-8");
+                params.put("Accept", "application/json");
+                return params;
+            }
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return datajson == null ? "{}".getBytes("utf-8") : datajson.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+
+                    return null;
+                }
+            }
+        };
+        if (requestQueue == null) {
+            requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(request);
+        } else {
+            requestQueue.add(request);
+        }
+    }
+
+    public static String fixEncoding(String response) {
+        try {
+            byte[] u = response.toString().getBytes(
+                    "ISO-8859-1");
+            response = new String(u, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return response;
     }
 
 }

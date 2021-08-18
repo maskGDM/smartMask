@@ -28,10 +28,10 @@ public class RegisterActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 String jsonLogin = "{\n" +
                         "    \"name\": \"" + et_name.getText().toString() + "\",\n" +
-                        "    \"lastname\": \"" + et_lastname.getText().toString() + "\"\n" +
-                        "    \"email\": \"" + et_mail.getText().toString() + "\"\n" +
-                        "    \"user\": \"" + et_user.getText().toString() + "\"\n" +
-                        "    \"pass\": \"" + et_pass.getText().toString() + "\"\n" +
+                        "    \"lastname\": \"" + et_lastname.getText().toString() + "\",\n" +
+                        "    \"email\": \"" + et_mail.getText().toString() + "\",\n" +
+                        "    \"user\": \"" + et_user.getText().toString() + "\",\n" +
+                        "    \"pass\": \"" + et_pass.getText().toString() + "\",\n" +
                         "    \"confirmpass\": \"" + et_pass2.getText().toString() + "\"\n" +
                         "}";
                 Log.i("Logs", jsonLogin);
