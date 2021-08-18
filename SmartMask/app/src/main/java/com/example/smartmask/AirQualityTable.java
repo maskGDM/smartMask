@@ -39,13 +39,6 @@ public class AirQualityTable extends AppCompatActivity {
     private TextView txtFechaInicio,txtFechaFin;
     private Button btnhearhregistry;
 
-    //handler
-    private Handler handler;
-    private Runnable mTicker;
-    // pastel
-
-    PieChart piechart;
-
     String jsonDataUser = "{}";
     RequestQueue requestQueue;
     String URL = "https://aplicaciones.uteq.edu.ec/smartmask/webapis/";
@@ -73,8 +66,8 @@ public class AirQualityTable extends AppCompatActivity {
                 public void onClick(View v) {
                     if(txtFechaInicio.getText() !=null && txtFechaFin.getText() !=null){
                         String jsonfiltrarbydate = "{\n" +
-                                "    \"id_usuario\":\"" + user_informationid +"\"\n" +
-                                "    \"stardate\":\"" + txtFechaInicio.getText() +"\"\n" +
+                                "    \"user_informationid\":\"" + user_informationid +"\",\n" +
+                                "    \"stardate\":\"" + txtFechaInicio.getText() +"\",\n" +
                                 "    \"enddate\":\"" + txtFechaFin.getText() +"\"\n" +
                                 "}";
                         Log.i("Logs", jsonfiltrarbydate);
@@ -92,24 +85,7 @@ public class AirQualityTable extends AppCompatActivity {
         }
 
 }
-    private void exec(){
-        handler= new Handler();
-        mTicker = new Runnable() {
-            @Override
-            public void run() {
-             //   grafi(); método que se llamará frecuentemente para simular el tiempo real
-                handler.postDelayed(this,1000);//se ejecutara cada 1 segundos
-            }
-        };
-        handler.postDelayed(mTicker,5000);//se ejecutara cada 5 segundos
-    }
 
-    // método para destruir el handler
-    @Override public void onDestroy ()
-    {
-        handler.removeCallbacks(mTicker);
-        super.onDestroy ();
-    }
     private void init(){
         txtFechaInicio=findViewById(R.id.txtFechaInicio);
         txtFechaFin=findViewById(R.id.txtFechaFin);
