@@ -48,11 +48,11 @@ public class Settings extends AppCompatActivity {
                 public void onClick(View v) {
                     if(txtMac.getText() !=null){
                         String jsonmac = "{\n" +
-                                "    \"id_usuario\":\"" + user_informationid +"\"\n" +
+                                "    \"user_informationid\":\"" + user_informationid +"\",\n" +
                                 "    \"mac\":\"" + txtMac.getText() +"\"\n" +
                                 "}";
                         Log.i("Logs", jsonmac);
-                        updateUser(jsonmac);
+                      //  connectmask(jsonmac);
                     }else{
                         Toast.makeText(Settings.this, "Empty fields", Toast.LENGTH_LONG).show();
                     }
@@ -103,12 +103,12 @@ public class Settings extends AppCompatActivity {
         birthdaydate= preferences.getString("birthdaydate",null);
     }
 
-    private void updateUser(String datajson){
+    private void connectmask(String datajson){
 
         //Obtención de datos del web service utilzando Volley
         // requestQueue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(
-                Request.Method.POST,URL+"maskapis/updateUser",
+                Request.Method.POST,URL+"maskapis/",
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,10 +21,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
@@ -32,7 +35,11 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.DataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
@@ -59,10 +66,11 @@ public class AirQuiality extends AppCompatActivity {
     private PieChart piechart;
     // barra
     private BarChart barChart;
-
-    String []meses=new String[] {"ppminternal","ppmexternal","pressure","temperature","humidity"};
-    int []ventas=new int[]{359,300,108,21,71};
-    int []color=new int[]{Color.BLUE,Color.CYAN,Color.GREEN,Color.MAGENTA,Color.RED};
+    TextView txtmqgasinterno, txtmqgasexterno;
+   // String []meses=new String[] {"ppminternal","ppmexternal","pressure","temperature","humidity"};
+   String []labels=new String[] {"pressure","temperature","altitude","humidity"};
+    int []airqdata=new int[]{108,21,71,70};
+    int []color=new int[]{Color.BLUE,Color.CYAN,Color.GREEN,Color.MAGENTA};
 
     //session
     private String user_informationid,user,names,lastnames,email,imguser,birthdaydate;
@@ -76,7 +84,9 @@ public class AirQuiality extends AppCompatActivity {
         sessionuser();
 
         if (user_informationid!=null && email != null) {
-
+            showpopupersonalized();
+            piechart = (PieChart) findViewById(R.id.Pastelchart);
+            barChart=(BarChart) findViewById(R.id.barChart);
             String datajson = "{\n" +
                     "    \"user_informationid\":\"" + user_informationid +"\"" +
                     "}";
@@ -87,14 +97,13 @@ public class AirQuiality extends AppCompatActivity {
             gologin();
         }
 
-        showpopupersonalized();
-        barChart=(BarChart) findViewById(R.id.barChart);
-        createCharts();
 
 
     }
 
     private void init(){
+        txtmqgasinterno =  (TextView) findViewById(R.id.txtmqgasinterno);
+        txtmqgasexterno =  (TextView) findViewById(R.id.txtmqgasexterno);
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
     }
 
@@ -120,8 +129,31 @@ public class AirQuiality extends AppCompatActivity {
         imguser= preferences.getString("imguser",null);
         birthdaydate= preferences.getString("birthdaydate",null);
     }
+    private void exec(String datajson){
+        handler= new Handler();
+        mTicker = new Runnable() {
+            @Override
+            public void run() {
+                airquilitydatapost(datajson); // método que se llamará frecuentemente para simular el tiempo real
+                handler.postDelayed(this,5000);//se ejecutara cada 1 segundos
+            }
+        };
+        handler.postDelayed(mTicker,5000);//se ejecutara cada 5 segundos
+    }
+
+ /*   // método para destruir el handler
+    @Override public void onDestroy ()
+    {
+        handler.removeCallbacks(mTicker);
+        super.onDestroy ();
+    } */
 
     private void airquilitydatapost(String datajson) {
+
+        Description descChartDescription = new Description();
+        descChartDescription.setEnabled(true);
+        piechart.setDescription(descChartDescription);
+
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 URL + "maskapis/maskRecordsOne",
@@ -134,8 +166,8 @@ public class AirQuiality extends AppCompatActivity {
                         //  Log.d("Respuesta", response);
                         try {
 
-                           // JSONArray jsonarray = new JSONArray(response);
-                            Log.d("JsonData",response);
+                            ArrayList<PieEntry> pieEntries=new ArrayList<>();
+                           // Log.d("JsonData",response);
                             JsonParser jsonParser = new JsonParser();
                             JsonObject jsonObject = jsonParser.parse(response).getAsJsonObject();
                             if (jsonObject.size() > 0) {
@@ -147,13 +179,30 @@ public class AirQuiality extends AppCompatActivity {
                                         {
                                             try {
                                                 JsonObject jsonAirQuality=jsonArray.get(f).getAsJsonObject();
-                                                  Log.d("ppminternal", jsonAirQuality.get("ppminternal").toString());
+                                               //   Log.d("ppminternal", jsonAirQuality.get("ppminternal").toString());
+                                                txtmqgasinterno.setText(jsonAirQuality.get("ppminternal").toString());
+                                                txtmqgasexterno.setText(jsonAirQuality.get("ppmexternal").toString());
+                                                pieEntries.add(new PieEntry( jsonAirQuality.get("ppminternal").getAsInt(), "ppminternal"));
+                                                pieEntries.add(new PieEntry( jsonAirQuality.get("ppmexternal").getAsInt(), "ppmexternal"));
+                                               // double presur = Double.parseDouble(jsonAirQuality.get("temperature").toString().replace("\"", ""));
+                                                //Log.d("presur", String.valueOf(presur));
+                                                airqdata = new int[]{(int) Double.parseDouble(jsonAirQuality.get("pressure").toString().replace("\"", "")),
+                                                        (int) Double.parseDouble(jsonAirQuality.get("temperature").toString().replace("\"", "")),
+                                                        (int) Double.parseDouble(jsonAirQuality.get("altitude").toString().replace("\"", "")),
+                                                        (int) Double.parseDouble(jsonAirQuality.get("humidity").toString().replace("\"", ""))};
+                                                createCharts();
                                             } catch (JsonIOException e) {
                                                 e.printStackTrace();
                                             }
                                         }
+                                        piechart.animateX(2500, Easing.EasingOption.EaseOutCirc);
+                                        PieDataSet pieDataSet=new PieDataSet(pieEntries, "ppminternal" +"-"+ "ppmexternal");
+                                        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+                                        pieDataSet.setDrawValues(true);
+                                        PieData pieData=new PieData(pieDataSet);
+                                        piechart.setData(pieData);
                                     }catch (Exception e) {
-//                            Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_LONG).show();
+                                        Log.e("Error",e.getMessage());
                                     }
                                 } else {
                                     Toast.makeText(AirQuiality.this, "Datos no capturados", Toast.LENGTH_LONG).show();
@@ -226,25 +275,25 @@ public class AirQuiality extends AppCompatActivity {
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
 
         ArrayList<LegendEntry> entries=new ArrayList<>();
-        for (int i=0;i<meses.length;i++){
+        for (int i=0;i<labels.length;i++){
             LegendEntry entry=new LegendEntry();
             entry.formColor=color[i];
-            entry.label=meses[i];
+            entry.label=labels[i];
             entries.add(entry);
         }
         legend.setCustom(entries);
     }
     private ArrayList<BarEntry>getBarEntries(){
         ArrayList<BarEntry> entries=new ArrayList<>();
-        for (int i=0;i<ventas.length;i++)
-            entries.add(new BarEntry(i,ventas[i]));
+        for (int i=0;i<airqdata.length;i++)
+            entries.add(new BarEntry(i,airqdata[i]));
             return entries;
 
     }
     private void axisX(XAxis axis){
         axis.setGranularityEnabled(true);
         axis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        axis.setValueFormatter(new IndexAxisValueFormatter(meses));
+        axis.setValueFormatter(new IndexAxisValueFormatter(labels));
 
     }
 
@@ -299,24 +348,7 @@ public class AirQuiality extends AppCompatActivity {
         });
     }
 
-    private void exec(String datajson){
-        handler= new Handler();
-        mTicker = new Runnable() {
-            @Override
-            public void run() {
-                airquilitydatapost(datajson); // método que se llamará frecuentemente para simular el tiempo real
-                handler.postDelayed(this,1000);//se ejecutara cada 1 segundos
-            }
-        };
-        handler.postDelayed(mTicker,5000);//se ejecutara cada 5 segundos
-    }
 
- /*   // método para destruir el handler
-    @Override public void onDestroy ()
-    {
-        handler.removeCallbacks(mTicker);
-        super.onDestroy ();
-    } */
 
 
 }
