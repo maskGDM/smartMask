@@ -58,7 +58,7 @@ public class UserCtrl {
         userModel.setNames(names);
         userModel.setLastnames(lastnames);
         userModel.setUser(user);
-        userModel.setUser_informationid(Integer.parseInt(userinformation_id));
+        userModel.setUser_informationid(userinformation_id);
         
         String status = "4", message = "Error al retornar datos", data = "[]";
         

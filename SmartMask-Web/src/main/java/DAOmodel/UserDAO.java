@@ -58,7 +58,7 @@ public class UserDAO implements UserCrud {
     public boolean login(User user) {
         String[] informationUser = (conex.fillString("select (user_informationid|| '-' || \"user\" ||'-' ||password) from \"user\" where \"user\" ='" + user.getUser() + "' and \"password\" ='" + user.getPassword() + "' and type='A'; ").split("-"));
         if (!"".equals(informationUser[0])) {
-            user.setUser_informationid(Integer.parseInt(informationUser[0]));
+            user.setUser_informationid((informationUser[0]));
             return (informationUser[1].equals(user.getUser())) && informationUser[2].equals(user.getPassword());
         } else {
             return false;
@@ -102,7 +102,7 @@ public class UserDAO implements UserCrud {
     public boolean loginU(User user) {
         String[] informationUser = (conex.fillString("select (user_informationid|| '-' || \"user\" ||'-' ||password) from \"user\" where \"user\" ='" + user.getUser() + "' and \"password\" ='" + user.getPassword() + "' and type='U'; ").split("-"));
         if (!"".equals(informationUser[0])) {
-            user.setUser_informationid(Integer.parseInt(informationUser[0]));
+            user.setUser_informationid((informationUser[0]));
             return (informationUser[1].equals(user.getUser())) && informationUser[2].equals(user.getPassword());
         } else {
             return false;
@@ -122,7 +122,7 @@ public class UserDAO implements UserCrud {
     public boolean loginSocial(User user, User_information user_information) {
         try {
             String[] informationUser = (conex.fillString("select (user_informationid|| '-' || socialnetworkcode|| '-' || \"user\") as result from \"user\" where \"user\" ='" + user.getUser() + "' and \"socialnetworkcode\" ='" + user.getSocialnetworkcode() + "' and type='U'; ").split("-"));
-            user.setUser_informationid(Integer.parseInt(informationUser[0]));
+            user.setUser_informationid((informationUser[0]));
             return (informationUser[1].equals(user.getSocialnetworkcode())) && informationUser[2].equals(user.getUser());
         } catch (Exception e) {
             return false;

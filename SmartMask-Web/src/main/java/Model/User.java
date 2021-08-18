@@ -15,12 +15,12 @@ import org.json.XML;
  */
 public class User {
 
-    int user_id;
+    String user_id;
     String user;
     String password;
-    int user_informationid;
-    int socialnetworkid;
-    char type;
+    String user_informationid;
+    String socialnetworkid;
+    String type;
     String socialnetworkcode;
     String json;
     String xml;
@@ -49,17 +49,7 @@ public class User {
      * @param json
      * @param xml
      */
-    public User(int user_id, String user, String password, int user_informationid, int socialnetworkid, char type, String socialnetworkcode, String json, String xml) {
-        this.user_id = user_id;
-        this.user = user;
-        this.password = password;
-        this.user_informationid = user_informationid;
-        this.socialnetworkid = socialnetworkid;
-        this.type = type;
-        this.socialnetworkcode = socialnetworkcode;
-        this.json = json;
-        this.xml = xml;
-    }
+
 
     /**
      * Parameterized construction method
@@ -73,34 +63,21 @@ public class User {
      * @param json
      * @param xml
      */
-    public User(String user, String password, int user_informationid, int socialnetworkid, char type, String socialnetworkcode, String json, String xml) {
-        this.user = user;
-        this.password = password;
-        this.user_informationid = user_informationid;
-        this.socialnetworkid = socialnetworkid;
-        this.type = type;
-        this.socialnetworkcode = socialnetworkcode;
-        this.json = json;
-        this.xml = xml;
-    }
+
 
     /**
      * Method to obtain identifier of user
      *
      * @return
      */
-    public int getUser_id() {
-        return user_id;
-    }
+
 
     /**
      * Set the identifier of user
      *
      * @param user_id
      */
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
+
 
     public String getUser() {
         return user;
@@ -133,44 +110,28 @@ public class User {
      *
      * @return
      */
-    public int getUser_informationid() {
-        return user_informationid;
-    }
+ 
 
     /**
      * Set the identifier of user
      *
      * @param user_informationid
      */
-    public void setUser_informationid(int user_informationid) {
-        this.user_informationid = user_informationid;
-    }
-
-    public int getSocialnetworkid() {
-        return socialnetworkid;
-    }
+    
 
     /**
      * Set the identifier of social network
      *
      * @param socialnetworkid
      */
-    public void setSocialnetworkid(int socialnetworkid) {
-        this.socialnetworkid = socialnetworkid;
-    }
 
-    public char getType() {
-        return type;
-    }
 
     /**
      * Set type
      *
      * @param type
      */
-    public void setType(char type) {
-        this.type = type;
-    }
+  
 
     public String getSocialnetworkcode() {
         return socialnetworkcode;
@@ -256,6 +217,38 @@ public class User {
 
     public void setImguser(String imguser) {
         this.imguser = imguser;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getUser_informationid() {
+        return user_informationid;
+    }
+
+    public void setUser_informationid(String user_informationid) {
+        this.user_informationid = user_informationid;
+    }
+
+    public String getSocialnetworkid() {
+        return socialnetworkid;
+    }
+
+    public void setSocialnetworkid(String socialnetworkid) {
+        this.socialnetworkid = socialnetworkid;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String returnXml() {

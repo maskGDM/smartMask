@@ -21,11 +21,12 @@ public class RecordsCtrl {
     }
 
     public String[] listRecords(
+            String type,
             String id_user
     ) {
         String status = "4", message = "Error al retornar datos", data = "[]";
 
-        String[] resp = recordsDao.listRecords("1", id_user);
+        String[] resp = recordsDao.listRecords(type, id_user);
 
         if (resp[0].equals("2")) {
             status = resp[0];

@@ -61,11 +61,43 @@ public class MaskApis {
 //            String sessionToken = Methods.JsonToString(Jso, "user_token", "");
 //            String[] clains = Methods.getDataToJwt(sessionToken);
 
-            String project_name = Methods.JsonToString(Jso, "id_usuario", "");
+            String user_informationid = Methods.JsonToString(Jso, "id_usuario", "");
 
 //            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
 //            if (res[0].equals("2")) {
-            String[] res = recordsCtrl.listRecords(project_name);
+            String[] res = recordsCtrl.listRecords("1", user_informationid);
+            message = Methods.getJsonMessage(res[0], res[1], res[2]);
+//            } else {
+//                message = Methods.getJsonMessage("4", "Error in the request parameters.", "[]");
+//            }
+        } else {
+            message = Methods.getJsonMessage("4", "Missing data.", "[]");
+        }
+        return Response.ok(message)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    @Path("/maskRecordsOne")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response maskRecordsOne(String data) {
+        String message;
+        System.out.println("maskRecordsOne()");
+        System.out.println(data);
+        JsonObject Jso = Methods.stringToJSON(data);
+        if (Jso.size() > 0) {
+//            String sessionToken = Methods.JsonToString(Jso, "user_token", "");
+//            String[] clains = Methods.getDataToJwt(sessionToken);
+
+            String user_informationid = Methods.JsonToString(Jso, "user_informationid", "");
+
+//            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
+//            if (res[0].equals("2")) {
+            String[] res = recordsCtrl.listRecords("2", user_informationid);
             message = Methods.getJsonMessage(res[0], res[1], res[2]);
 //            } else {
 //                message = Methods.getJsonMessage("4", "Error in the request parameters.", "[]");
@@ -93,7 +125,7 @@ public class MaskApis {
 //            String sessionToken = Methods.JsonToString(Jso, "user_token", "");
 //            String[] clains = Methods.getDataToJwt(sessionToken);
 
-            String id_usuario = Methods.JsonToString(Jso, "id_usuario", "");
+            String id_usuario = Methods.JsonToString(Jso, "user_informationid", "");
             String stardate = Methods.JsonToString(Jso, "stardate", "");
             String enddate = Methods.JsonToString(Jso, "enddate", "");
 
