@@ -44,10 +44,10 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgUser"
-        android:layout_width="106dp"
-        android:layout_height="96dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +60,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="In this part you can edit your personal information"
         android:textSize="16sp"
@@ -73,7 +73,7 @@
     <EditText
         android:id="@+id/txtMyNombre1"
         android:layout_width="0dp"
-        android:layout_height="30dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -87,11 +87,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 
-
     <EditText
         android:id="@+id/txtMyApellido1"
         android:layout_width="0dp"
-        android:layout_height="30dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -102,10 +101,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMyUser1" />
+
     <EditText
         android:id="@+id/txtMyUser1"
         android:layout_width="0dp"
-        android:layout_height="30dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -117,17 +117,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMyNombre1" />
+
     <Button
         android:id="@+id/btnEdit"
         android:layout_width="0dp"
-        android:layout_height="35dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/backgrund_bottom"
         android:text="Edit"
         android:textColor="#003249"
-        android:textSize="14sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -135,11 +136,10 @@
         app:layout_constraintTop_toBottomOf="@+id/txtMyCorreo1" />
 
 
-
     <EditText
         android:id="@+id/txtMyCorreo1"
         android:layout_width="0dp"
-        android:layout_height="30dp"
+        android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -152,7 +152,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtMyApellido1" />
 
-    <Button
+    <!--<Button
         android:id="@+id/btnLogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -163,6 +163,6 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view8" />
+        app:layout_constraintTop_toTopOf="@+id/view8" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

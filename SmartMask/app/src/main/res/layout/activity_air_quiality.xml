@@ -18,64 +18,104 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/linearChar"/>-->
+
+    <TextView
+        android:id="@+id/texto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="ENVIRONMENTAL INDICATORS CHART"
+        android:textAlignment="center"
+        android:textColor="#003249"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barChart"
         android:layout_width="400dp"
-        android:layout_height="350dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="16dp"
         android:layout_weight="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/texto"
+        app:layout_constraintTop_toTopOf="parent" />
 
-   <androidx.cardview.widget.CardView
-       android:id="@+id/cvinfopastelchart"
-       android:layout_width="match_parent"
-       android:layout_height="100dp"
-       android:layout_marginTop="10dp"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@+id/barChart">
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent">
-           <TextView
-               android:id="@+id/txttextgi"
-               android:layout_width="30dp"
-               android:layout_height="wrap_content"
-               android:layout_marginLeft="80dp"
-               android:background="#d32f2f" />
-           <TextView
-               android:id="@+id/txtmqgasinterno"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginRight="20dp"
-               android:text="0.0"
-               android:textColor="@color/black"
-               android:textSize="40dp" />
-           <TextView
-               android:id="@+id/txttextge"
-               android:layout_width="30dp"
-               android:layout_marginLeft="40dp"
-               android:layout_height="wrap_content"
-               android:background="#ff5722" />
-           <TextView
-               android:id="@+id/txtmqgasexterno"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_marginRight="20dp"
-               android:text="0.0"
-               android:textColor="@color/black"
-               android:textSize="40dp" />
-       </LinearLayout>
+    <TextView
+        android:id="@+id/texto1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:text="AIR QUALITY CHART"
+        android:textAlignment="center"
+        android:textColor="#003249"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barChart" />
 
 
-   </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvinfopastelchart"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barChart">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txttextgi"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:background="#d32f2f" />
+
+            <TextView
+                android:id="@+id/txtmqgasinterno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="0.0"
+                android:textColor="@color/black"
+                android:textSize="40dp" />
+
+            <TextView
+                android:id="@+id/txttextge"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:background="#ff5722" />
+
+            <TextView
+                android:id="@+id/txtmqgasexterno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="0.0"
+                android:textColor="@color/black"
+                android:textSize="40dp" />
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/Pastelchart"
         android:layout_width="400dp"
         android:layout_height="250dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
