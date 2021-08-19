@@ -83,12 +83,12 @@ public class MaskServlet extends HttpServlet {
         int type = Integer.parseInt(request.getParameter("Type"));
         switch (type) {
             case 1: {
-                mask.setUser_id(Integer.parseInt(request.getParameter("Datum")));
+                mask.setUser_informationid((request.getParameter("Datum")));
                 jsonResult = "{\"status\":200, \"result\":" + (maskDAO.jsonMask(mask)) + "}";
                 break;
             }
             case 2: {//insert    
-                mask.setMask_code(new JSONObject(request.getParameter("Datum")).getJSONObject("mask").getInt("mask_code"));
+                mask.setMask_code(new JSONObject(request.getParameter("Datum")).getJSONObject("mask").getString("mask_code"));
                 System.out.println(maskDAO.activeMask(mask));
                 if (maskDAO.activeMask(mask) == false) {
                     mask.setJson(request.getParameter("Datum"));
@@ -103,7 +103,7 @@ public class MaskServlet extends HttpServlet {
                 break;
             }
             case 3: {//select data mask   
-                mask.setUser_id(Integer.parseInt(request.getParameter("Datum")));
+                mask.setUser_informationid((request.getParameter("Datum")));
                 String getData = null;
                 if (!"".equals(request.getParameter("Limit"))) {
                     getData = (maskDAO.jsonMaskDailyDataLimit(mask, Integer.parseInt(request.getParameter("Limit"))));
@@ -119,7 +119,7 @@ public class MaskServlet extends HttpServlet {
                 break;
             }
             case 4: {//select data mask   
-                mask.setUser_id(Integer.parseInt(request.getParameter("Datum")));
+                mask.setUser_informationid((request.getParameter("Datum")));
                 if (maskDAO.deleteorresetMask(mask)) {
                     jsonResult = "{\"status\":200}";
                 } else {
@@ -129,7 +129,7 @@ public class MaskServlet extends HttpServlet {
                 break;
             }
             case 5: {//select mask one month              
-                mask.setUser_id(Integer.parseInt(request.getParameter("Datum")));
+                mask.setUser_informationid((request.getParameter("Datum")));
                 String getData = null;
                 if (!"".equals(request.getParameter("Limit"))) {
                     getData = (maskDAO.jsonMask1MonthDataLimit(mask, Integer.parseInt(request.getParameter("Limit"))));
@@ -144,7 +144,7 @@ public class MaskServlet extends HttpServlet {
                 break;
             }
             case 6: {//select mask 3 month               
-                mask.setUser_id(Integer.parseInt(request.getParameter("Datum")));
+                mask.setUser_informationid((request.getParameter("Datum")));
                 String getData = null;
                 getData = (maskDAO.jsonMask3MonthData(mask));
                 if (!"[]".equals(getData)) {// que no tenga datos agregados para no repetir
@@ -156,7 +156,7 @@ public class MaskServlet extends HttpServlet {
             }
             case 7: {//select mask report    
                 JSONObject jsonReport = new JSONObject(request.getParameter("Datum")).getJSONObject("Report");
-                mask.setUser_id(jsonReport.getInt("idUser"));
+                mask.setUser_informationid(jsonReport.getString("idUser"));
                 String getData = null;
                 System.out.println((jsonReport.getString("dateInit")) + "=====" + (jsonReport.getString("dateEnd")));
                 getData = (maskDAO.jsonMaskReport(mask, (jsonReport.getString("dateInit")), (jsonReport.getString("dateEnd"))));

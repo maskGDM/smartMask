@@ -9,6 +9,7 @@ import Config.Conection;
 import Interfaces.MaskCrud;
 import Model.Mask;
 import java.util.Date;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * This DAO model class contains the attributes and methods of a mask
@@ -28,7 +29,7 @@ public class MaskDAO implements MaskCrud {
      * @return Return one json string
      */
     public String jsonMask(Mask mask) {
-        return conex.getRecordsInJson("SELECT * FROM mask WHERE user_informationid=" + mask.getUser_id());
+        return conex.getRecordsInJson("SELECT * FROM mask WHERE user_informationid=" + mask.getUser_informationid());
     }
 
     /**
@@ -42,7 +43,7 @@ public class MaskDAO implements MaskCrud {
     public String jsonMaskDailyData(Mask mask) {
         return conex.getRecordsInJson("select (r.datetimegistration)::time, r.alert,  r.ppminternal,  pressure, temperature, altitude, humidity, m.mask_code, m.user_informationid from records as r \n"
                 + "inner join mask as m on m.mask_code = r.mask_code \n"
-                + "WHERE r.datetimegistration >= (date_trunc('day', CURRENT_DATE)) and m.user_informationid = " + mask.getUser_id() + "\n"
+                + "WHERE r.datetimegistration >= (date_trunc('day', CURRENT_DATE)) and m.user_informationid = " + mask.getUser_informationid() + "\n"
                 + "order by r.datetimegistration asc;");
     }
 
@@ -58,7 +59,7 @@ public class MaskDAO implements MaskCrud {
     public String jsonMaskDailyDataLimit(Mask mask, int limit) {
         return conex.getRecordsInJson("select * from (select (r.datetimegistration)::time, r.alert,  r.ppminternal, pressure, temperature, altitude, humidity, m.mask_code, m.user_informationid from records as r \n"
                 + "inner join mask as m on m.mask_code = r.mask_code \n"
-                + "WHERE r.datetimegistration >= (date_trunc('day', CURRENT_DATE)) and m.user_informationid = " + mask.getUser_id() + "\n"
+                + "WHERE r.datetimegistration >= (date_trunc('day', CURRENT_DATE)) and m.user_informationid = " + mask.getUser_informationid() + "\n"
                 + "order by r.datetimegistration desc limit " + limit + ") as X order by datetimegistration  asc;");
     }
 
@@ -72,7 +73,7 @@ public class MaskDAO implements MaskCrud {
     public String jsonMask3MonthData(Mask mask) {
         return conex.getRecordsInJson("select (r.datetimegistration), r.alert,  r.ppminternal, pressure, temperature, altitude, humidity, m.mask_code, m.user_informationid from records as r \n"
                 + "inner join mask as m on m.mask_code = r.mask_code \n"
-                + "WHERE r.datetimegistration >= (date_trunc('month', CURRENT_DATE - INTERVAL '3 month')) and m.user_informationid = " + mask.getUser_id() + "\n"
+                + "WHERE r.datetimegistration >= (date_trunc('month', CURRENT_DATE - INTERVAL '3 month')) and m.user_informationid = " + mask.getUser_informationid() + "\n"
                 + "order by r.datetimegistration asc;");
     }
 
@@ -86,7 +87,7 @@ public class MaskDAO implements MaskCrud {
     public String jsonMask1MonthData(Mask mask) {
         return conex.getRecordsInJson("select (r.datetimegistration), r.alert,  r.ppminternal, pressure, temperature, altitude, humidity, m.mask_code, m.user_informationid from records as r \n"
                 + "inner join mask as m on m.mask_code = r.mask_code \n"
-                + "WHERE r.datetimegistration >= (date_trunc('month', CURRENT_DATE - INTERVAL '1 month')) and m.user_informationid = " + mask.getUser_id() + "\n"
+                + "WHERE r.datetimegistration >= (date_trunc('month', CURRENT_DATE - INTERVAL '1 month')) and m.user_informationid = " + mask.getUser_informationid() + "\n"
                 + "order by r.datetimegistration asc;");
     }
 
@@ -101,7 +102,7 @@ public class MaskDAO implements MaskCrud {
     public String jsonMask1MonthDataLimit(Mask mask, int limit) {
         return conex.getRecordsInJson("select * from (select (r.datetimegistration), r.alert,  r.ppminternal, m.mask_code, pressure, temperature, altitude, humidity, m.user_informationid from records as r \n"
                 + "inner join mask as m on m.mask_code = r.mask_code \n"
-                + "WHERE r.datetimegistration >= (date_trunc('month', CURRENT_DATE - INTERVAL '1 month')) and m.user_informationid = " + mask.getUser_id() + "\n"
+                + "WHERE r.datetimegistration >= (date_trunc('month', CURRENT_DATE - INTERVAL '1 month')) and m.user_informationid = " + mask.getUser_informationid() + "\n"
                 + "order by r.datetimegistration desc limit " + limit + ") as X order by datetimegistration asc;");
     }
 
@@ -146,11 +147,11 @@ public class MaskDAO implements MaskCrud {
     public String jsonMaskReport(Mask mask, String init, String end) {
         System.out.println("select (r.datetimegistration), r.alert,  r.ppminternal, pressure, temperature, altitude, humidity, m.mask_code, m.user_informationid from records as r \n"
                 + "inner join mask as m on m.mask_code = r.mask_code \n"
-                + "WHERE r.datetimegistration >= '" + init + "' and r.datetimegistration < '" + end + " 23:59:59.999999' and m.user_informationid = " + mask.getUser_id() + " \n"
+                + "WHERE r.datetimegistration >= '" + init + "' and r.datetimegistration < '" + end + " 23:59:59.999999' and m.user_informationid = " + mask.getUser_informationid() + " \n"
                 + "order by r.datetimegistration asc");
         return conex.getRecordsInJson("select (r.datetimegistration), r.alert,  r.ppminternal, pressure, temperature, altitude, humidity, m.mask_code, m.user_informationid from records as r \n"
                 + "inner join mask as m on m.mask_code = r.mask_code \n"
-                + "WHERE r.datetimegistration >= '" + init + "' and r.datetimegistration < '" + end + " 23:59:59.999999' and m.user_informationid = " + mask.getUser_id() + " \n"
+                + "WHERE r.datetimegistration >= '" + init + "' and r.datetimegistration < '" + end + " 23:59:59.999999' and m.user_informationid = " + mask.getUser_informationid() + " \n"
                 + "order by r.datetimegistration asc");
     }
 
@@ -205,6 +206,45 @@ public class MaskDAO implements MaskCrud {
         return conex.modifyBD("SELECT addmask('" + mask.getJson2Xml() + "');");
     }
 
+    public String[] saveMask(Mask mask) {
+        String query = String.format("SELECT * from addmask('" + mask.returnXml() + "');");
+        System.out.println(query);
+        DefaultTableModel tab = conex.returnRecord(query);
+        if (tab.getRowCount() > 0) {
+            return new String[]{
+                tab.getValueAt(0, 0).toString(),
+                tab.getValueAt(0, 1).toString()};
+        } else {
+            return new String[]{"4", ""};
+        }
+    }
+
+    public String[] selectMask(Mask mask) {
+        String query = String.format("SELECT * from listmasks('" + mask.getUser_informationid() + "');");
+        System.out.println(query);
+        DefaultTableModel tab = conex.returnRecord(query);
+        if (tab.getRowCount() > 0) {
+            return new String[]{
+                tab.getValueAt(0, 0).toString(),
+                tab.getValueAt(0, 1).toString()};
+        } else {
+            return new String[]{"4", ""};
+        }
+    }
+
+    public String[] deleteMask(Mask mask) {
+        String query = String.format("SELECT * from deletemask('" + mask.getMask_code() + "');");
+        System.out.println(query);
+        DefaultTableModel tab = conex.returnRecord(query);
+        if (tab.getRowCount() > 0) {
+            return new String[]{
+                tab.getValueAt(0, 0).toString(),
+                tab.getValueAt(0, 1).toString()};
+        } else {
+            return new String[]{"4", ""};
+        }
+    }
+
     @Override
     public boolean editMask(Mask mask) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -212,7 +252,7 @@ public class MaskDAO implements MaskCrud {
 
     @Override
     public boolean deleteorresetMask(Mask mask) {
-        return conex.modifyBD("delete from data where user_informationid=" + mask.getUser_id());
+        return conex.modifyBD("delete from data where user_informationid=" + mask.getUser_informationid());
     }
 
 }

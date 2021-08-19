@@ -253,6 +253,6 @@ public class User {
 
     public String returnXml() {
         JSONObject jsonU = new JSONObject(this);
-        return "<user>" + XML.toString(jsonU) + "</user>";
+        return "<users>" + XML.toString(jsonU) + "</users>";
     }
 }

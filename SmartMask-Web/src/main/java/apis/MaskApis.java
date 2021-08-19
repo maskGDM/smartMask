@@ -6,6 +6,7 @@
 package apis;
 
 import Config.Methods;
+import Controller.MaskCtrl;
 import Controller.RecordsCtrl;
 import Controller.UserCtrl;
 import com.google.gson.JsonObject;
@@ -34,6 +35,7 @@ public class MaskApis {
 //    RecordsDAO recordsDAO;
     RecordsCtrl recordsCtrl;
     UserCtrl userCtrl;
+    MaskCtrl maskCtrl;
 
     /**
      * Creates a new instance of Project, Files, Data
@@ -41,6 +43,8 @@ public class MaskApis {
     public MaskApis() {
         recordsCtrl = new RecordsCtrl();
         userCtrl = new UserCtrl();
+        maskCtrl = new MaskCtrl();
+
     }
 
     /*
@@ -204,7 +208,7 @@ public class MaskApis {
             String names = Methods.JsonToString(Jso, "names", "");
             String lastnames = Methods.JsonToString(Jso, "lastnames", "");
             String user = Methods.JsonToString(Jso, "user", "");
-            String userinformation_id = Methods.JsonToString(Jso, "userinformation_id", "");
+            String userinformation_id = Methods.JsonToString(Jso, "user_informationid", "");
 
 //            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
 //            if (res[0].equals("2")) {
@@ -222,4 +226,107 @@ public class MaskApis {
                 .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
                 .build();
     }
+
+    /*
+     * ********************************************
+     * Mask
+     *********************************************
+     */
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    @Path("/saveMask")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response saveMask(String data) {
+        String message;
+        System.out.println("saveMask()");
+        System.out.println(data);
+        JsonObject Jso = Methods.stringToJSON(data);
+        if (Jso.size() > 0) {
+//            String sessionToken = Methods.JsonToString(Jso, "user_token", "");
+//            String[] clains = Methods.getDataToJwt(sessionToken);
+
+            String mask_code = Methods.JsonToString(Jso, "mac", "");
+            String userinformation_id = Methods.JsonToString(Jso, "user_informationid", "");
+
+//            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
+//            if (res[0].equals("2")) {
+            String[] res = maskCtrl.saveMask(mask_code, userinformation_id);
+            message = Methods.getJsonMessage(res[0], res[1], res[2]);
+//            } else {
+//                message = Methods.getJsonMessage("4", "Error in the request parameters.", "[]");
+//            }
+        } else {
+            message = Methods.getJsonMessage("4", "Missing data.", "[]");
+        }
+        return Response.ok(message)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    @Path("/selectMask")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response selectMask(String data) {
+        String message;
+        System.out.println("selectMask()");
+        System.out.println(data);
+        JsonObject Jso = Methods.stringToJSON(data);
+        if (Jso.size() > 0) {
+//            String sessionToken = Methods.JsonToString(Jso, "user_token", "");
+//            String[] clains = Methods.getDataToJwt(sessionToken);
+
+            String userinformation_id = Methods.JsonToString(Jso, "user_informationid", "");
+
+//            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
+//            if (res[0].equals("2")) {
+            String[] res = maskCtrl.selectMask(userinformation_id);
+            message = Methods.getJsonMessage(res[0], res[1], res[2]);
+//            } else {
+//                message = Methods.getJsonMessage("4", "Error in the request parameters.", "[]");
+//            }
+        } else {
+            message = Methods.getJsonMessage("4", "Missing data.", "[]");
+        }
+        return Response.ok(message)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    @Path("/deleteMask")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response deleteMask(String data) {
+        String message;
+        System.out.println("deleteMask()");
+        System.out.println(data);
+        JsonObject Jso = Methods.stringToJSON(data);
+        if (Jso.size() > 0) {
+//            String sessionToken = Methods.JsonToString(Jso, "user_token", "");
+//            String[] clains = Methods.getDataToJwt(sessionToken);
+
+            String mask_code = Methods.JsonToString(Jso, "mac", "");
+
+//            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
+//            if (res[0].equals("2")) {
+            String[] res = maskCtrl.deleteMask(mask_code);
+            message = Methods.getJsonMessage(res[0], res[1], res[2]);
+//            } else {
+//                message = Methods.getJsonMessage("4", "Error in the request parameters.", "[]");
+//            }
+        } else {
+            message = Methods.getJsonMessage("4", "Missing data.", "[]");
+        }
+        return Response.ok(message)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+
 }
