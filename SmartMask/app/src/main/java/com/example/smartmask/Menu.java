@@ -207,7 +207,7 @@ public class Menu extends AppCompatActivity {
 
         Uri soundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Bitmap icon = BitmapFactory.decodeResource(getResources(),
-                R.mipmap.logosmartm);
+                R.drawable.logosmartmask);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext(),CHANNEL_ID)
                 .setSmallIcon(R.drawable.notifications)
                 .setLargeIcon(icon)
