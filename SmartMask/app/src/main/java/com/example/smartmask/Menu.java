@@ -272,7 +272,7 @@ public class Menu extends AppCompatActivity {
                                                 //   Log.d("ppminternal", jsonAirQuality.get("ppminternal").toString());
                                                 if(jsonAirQuality.get("alert").toString().equals("true")){
                                                    // Log.d("ALERTA PARA ",response);
-                                                    sendMyNotification("Notificación Android","Emitiendo alerta por si las moscas");
+                                                    sendMyNotification("Notificación Android","Emitiendo alerta");
                                                     createNotificationChannel();
                                                 }
 

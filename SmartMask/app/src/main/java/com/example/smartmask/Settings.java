@@ -171,5 +171,4 @@ public class Settings extends AppCompatActivity {
         }
         return response;
     }
-
 }

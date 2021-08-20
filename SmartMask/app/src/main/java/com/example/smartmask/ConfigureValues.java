@@ -50,6 +50,13 @@ public class ConfigureValues extends AppCompatActivity {
                     if(Dioximin !=null && Dioximax !=null && Monomin !=null && Monomax !=null
                             && Ammomin !=null && Ammomax !=null && Butanomin !=null
                             && Butanomax !=null){
+
+                        String jsondataget = "{\n" +
+                                "    \"user_informationid\":\"" + user_informationid +"\"\n" +
+                                "}";
+
+                       // getconfigurevalues(jsondataget);
+
                         String jsondata = "{\n" +
                                 "    \"user_informationid\":\"" + user_informationid +"\",\n" +
                                 "    \"Dioximin\":\"" + Dioximin.getText() +"\",\n" +
@@ -133,6 +140,70 @@ public class ConfigureValues extends AppCompatActivity {
                             {
                                 json_transform = new JSONObject(response);
                               //  Toast.makeText(ConfigureValues.this, json_transform.getString("information"), Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error.Response", String.valueOf(error));
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json; charset=utf-8");
+                params.put("Accept", "application/json");
+                return params;
+            }
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return datajson == null ? "{}".getBytes("utf-8") : datajson.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+
+                    return null;
+                }
+            }
+        };
+        if (requestQueue == null) {
+            requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(request);
+        } else {
+            requestQueue.add(request);
+        }
+    }
+
+    private void getconfigurevalues(String datajson){
+
+        //Obtención de datos del web service utilzando Volley
+        // requestQueue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(
+                Request.Method.POST,URL+"",
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        int size = response.length();
+                        response = fixEncoding(response);
+                        JSONObject json_transform = null;
+                        try {
+                            if (size > 0)
+                            {
+                                json_transform = new JSONObject(response);
+                               /* Dioximin.setText("");
+                                Dioximax.setText("");
+                                Monomin.setText("");
+                                Monomax.setText("");
+                                Ammomin.setText("");
+                                Ammomax.setText("");
+                                Butanomin.setText("");
+                                Butanomax.setText(""); */
+
+                                //  Toast.makeText(ConfigureValues.this, json_transform.getString("information"), Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
