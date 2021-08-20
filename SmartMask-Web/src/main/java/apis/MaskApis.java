@@ -187,6 +187,43 @@ public class MaskApis {
                 .build();
     }
 
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    @Path("/sigIn")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response sigIn(String data) {
+        String message;
+        System.out.println("sigIn()");
+        System.out.println(data);
+        JsonObject Jso = Methods.stringToJSON(data);
+        if (Jso.size() > 0) {
+//            String sessionToken = Methods.JsonToString(Jso, "user_token", "");
+//            String[] clains = Methods.getDataToJwt(sessionToken);
+//
+            String name = Methods.JsonToString(Jso, "name", "");
+            String lastname = Methods.JsonToString(Jso, "lastname", "");
+            String email = Methods.JsonToString(Jso, "email", "");
+            String user = Methods.JsonToString(Jso, "user", "");
+            String pass = Methods.JsonToString(Jso, "pass", "");
+            String confirmpass = Methods.JsonToString(Jso, "confirmpass", "");
+
+//            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
+//            if (res[0].equals("2")) {
+            String[] res = userCtrl.sigIn(name, lastname, email, user, pass, confirmpass);
+            message = Methods.getJsonMessage(res[0], res[1], res[2]);
+//            } else {
+//                message = Methods.getJsonMessage("4", "Error in the request parameters.", "[]");
+//            }
+        } else {
+            message = Methods.getJsonMessage("4", "Missing data.", "[]");
+        }
+        return Response.ok(message)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+
     /*
      * ********************************************
      * User

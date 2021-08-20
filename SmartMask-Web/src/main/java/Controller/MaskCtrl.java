@@ -45,7 +45,7 @@ public class MaskCtrl {
             message = "Los datos se han retornado correctamente";
         } else if (resp[0].equals("3")) {
             status = resp[0];
-            message = "La mascarilla se encuentra ya en uso";
+            message = "No se puede agregar esta mascarilla";
         }
         return new String[]{status, message, data};
     }
