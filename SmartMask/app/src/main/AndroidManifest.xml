@@ -15,6 +15,7 @@
             android:name=".DeleteMask"
             android:exported="true" />
         <activity android:name=".AirQualityTable" />
+        <activity android:name=".ListMaskActivity" />
         <activity android:name=".AirQuiality" />
         <activity android:name=".Profile1" />
         <activity android:name=".Options" />
