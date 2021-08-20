@@ -1,6 +1,7 @@
 package com.example.smartmask;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity  {
                         "    \"confirmpass\": \"" + et_pass2.getText().toString() + "\"\n" +
                         "}";
                 Log.i("Logs", jsonLogin);
+                registryuser(jsonLogin);
             }
       });
     }
@@ -73,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity  {
 
         //Obtención de datos del web service utilzando Volley
         StringRequest request = new StringRequest(
-                Request.Method.POST,URL+"maskapis/", // FALTA COMPLETARRRRRRRRRRR
+                Request.Method.POST,URL+"maskapis/sigIn", //
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -85,6 +87,7 @@ public class RegisterActivity extends AppCompatActivity  {
                             {
                                 json_transform = new JSONObject(response);
                                 Toast.makeText(RegisterActivity.this, json_transform.getString("information"), Toast.LENGTH_LONG).show();
+                                gologin();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -133,5 +136,14 @@ public class RegisterActivity extends AppCompatActivity  {
             return null;
         }
         return response;
+    }
+
+    public void gologin() {
+        Intent i = new Intent(this, MainActivity.class);
+        // bandera para que no se creen nuevas actividades innecesarias
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
     }
 }
