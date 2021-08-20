@@ -232,6 +232,13 @@ public class Menu extends AppCompatActivity {
         };
         handler.postDelayed(mTicker,5000);//se ejecutara cada 5 segundos
     }
+    public void eliminarMask(View view){
+        Intent intent=new Intent(Menu.this, DeleteMask.class);
+        Bundle b=new Bundle();
+
+        intent.putExtras(b);
+        startActivity(intent);
+    }
 
     public static String fixEncoding(String response) {
         try {
@@ -272,7 +279,7 @@ public class Menu extends AppCompatActivity {
                                                 //   Log.d("ppminternal", jsonAirQuality.get("ppminternal").toString());
                                                 if(jsonAirQuality.get("alert").toString().equals("true")){
                                                    // Log.d("ALERTA PARA ",response);
-                                                    sendMyNotification("Notificación Android","Emitiendo alerta por si las moscas");
+                                                    sendMyNotification("Notificación Android","Emitiendo alerta");
                                                     createNotificationChannel();
                                                 }
 

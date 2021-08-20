@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ public class AirQualityTable extends AppCompatActivity {
     private DatePickerDialog datePickerDialog,dateFinish;
     private TextView txtFechaInicio,txtFechaFin;
     private Button btnhearhregistry;
+    private ProgressDialog proDialog;
+    private TableLayout table;
 
     String jsonDataUser = "{}";
     RequestQueue requestQueue;
@@ -52,7 +55,10 @@ public class AirQualityTable extends AppCompatActivity {
         setContentView(R.layout.activity_air_quality_table);
         init();
         sessionuser();
+
         if (user_informationid!=null && email != null) {
+
+
             Log.i("User", email);
             requestQueue = Volley.newRequestQueue(this);
             String jsonfiltrarall = "{\n" +
@@ -65,6 +71,7 @@ public class AirQualityTable extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(txtFechaInicio.getText() !=null && txtFechaFin.getText() !=null){
+                        table.removeViews(1, Math.max(0, table.getChildCount() - 1));
                         String jsonfiltrarbydate = "{\n" +
                                 "    \"user_informationid\":\"" + user_informationid +"\",\n" +
                                 "    \"stardate\":\"" + txtFechaInicio.getText() +"\",\n" +
@@ -78,6 +85,7 @@ public class AirQualityTable extends AppCompatActivity {
                 }
             });
             initDatePicker();
+            initDatePickerFinal();
 
         } else {
             Toast.makeText(AirQualityTable.this, "No session", Toast.LENGTH_LONG).show();
@@ -89,6 +97,7 @@ public class AirQualityTable extends AppCompatActivity {
     private void init(){
         txtFechaInicio=findViewById(R.id.txtFechaInicio);
         txtFechaFin=findViewById(R.id.txtFechaFin);
+        txtFechaFin.setText(getTodayDate());
         txtFechaInicio.setText(getTodayDate());
         btnhearhregistry=findViewById(R.id.btnshearhregistry);
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
@@ -122,14 +131,41 @@ public class AirQualityTable extends AppCompatActivity {
         int day=cal.get(Calendar.DAY_OF_MONTH);
         return makeDateString(day,month,year);
     }
+    private String getTodayDateFinal(){
+        Calendar cal= Calendar.getInstance();
+        int year=cal.get(Calendar.YEAR);
+        int month=cal.get(Calendar.MONTH);
+        int day=cal.get(Calendar.DAY_OF_MONTH);
+        return makeDateString(day,month,year);
+    }
+
     private void initDatePicker(){
         DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month=month+1;
                 String date=makeDateString(day,month,year);
-                String finaldate=makeDateStringFinish(day,month,year);
+                //String finaldate=makeDateStringFinish(day,month,year);
                 txtFechaInicio.setText(date);
+                //txtFechaFin.setText(finaldate);
+            }
+        };
+        Calendar cal= Calendar.getInstance();
+        int year=cal.get(Calendar.YEAR);
+        int month=cal.get(Calendar.MONTH);
+        int day=cal.get(Calendar.DAY_OF_MONTH);
+        int style= AlertDialog.THEME_HOLO_LIGHT;
+        datePickerDialog=new DatePickerDialog(this,style,dateSetListener,year,month,day);
+       //dateFinish=new DatePickerDialog(this,style,dateSetListener,year,month,day);
+    }
+    private void initDatePickerFinal(){
+        DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month=month+1;
+                //String date=makeDateString(day,month,year);
+                String finaldate=makeDateStringFinish(day,month,year);
+                //txtFechaInicio.setText(date);
                 txtFechaFin.setText(finaldate);
             }
         };
@@ -138,9 +174,8 @@ public class AirQualityTable extends AppCompatActivity {
         int month=cal.get(Calendar.MONTH);
         int day=cal.get(Calendar.DAY_OF_MONTH);
         int style= AlertDialog.THEME_HOLO_LIGHT;
-
-        datePickerDialog=new DatePickerDialog(this,style,dateSetListener,year,month,day);
-       dateFinish=new DatePickerDialog(this,style,dateSetListener,year,month,day);
+        //datePickerDialog=new DatePickerDialog(this,style,dateSetListener,year,month,day);
+        dateFinish=new DatePickerDialog(this,style,dateSetListener,year,month,day);
     }
     private String makeDateString(int day, int month, int year){
        // return getMonthFormat(month)+ " " + day + " " + year;
@@ -190,6 +225,7 @@ public class AirQualityTable extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, URL +  ruta, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 Log.i("Logs", response);
                 JsonParser jsonParser = new JsonParser();
                 JsonObject jsonObject = jsonParser.parse(response).getAsJsonObject();
@@ -275,7 +311,9 @@ public class AirQualityTable extends AppCompatActivity {
     }
 
     private void tableAdapt(ArrayList<String[]> lista, boolean dataAir) {
-        TableLayout table = (TableLayout) findViewById(R.id.table);
+
+        table = (TableLayout) findViewById(R.id.table);
+
         ModalAirQualityTable tbModel = new ModalAirQualityTable(AirQualityTable.this, table);
 
         if (dataAir) {

@@ -1,16 +1,36 @@
 package com.example.smartmask;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
+
 public class RegisterActivity extends AppCompatActivity  {
+
+    private String URL = "https://aplicaciones.uteq.edu.ec/smartmask/webapis/";
+    private RequestQueue requestQueue;
+
     private EditText et_name,et_lastname,et_mail,et_user, et_pass,et_pass2;
     private Button  btnSignUp;
     //session
@@ -35,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity  {
                         "    \"confirmpass\": \"" + et_pass2.getText().toString() + "\"\n" +
                         "}";
                 Log.i("Logs", jsonLogin);
+                registryuser(jsonLogin);
             }
       });
     }
@@ -50,4 +71,79 @@ public class RegisterActivity extends AppCompatActivity  {
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
     }
 
+    private void registryuser(String datajson){
+
+        //Obtención de datos del web service utilzando Volley
+        StringRequest request = new StringRequest(
+                Request.Method.POST,URL+"maskapis/sigIn", //
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        int size = response.length();
+                        response = fixEncoding(response);
+                        JSONObject json_transform = null;
+                        try {
+                            if (size > 0)
+                            {
+                                json_transform = new JSONObject(response);
+                                Toast.makeText(RegisterActivity.this, json_transform.getString("information"), Toast.LENGTH_LONG).show();
+                                gologin();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error.Response", String.valueOf(error));
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json; charset=utf-8");
+                params.put("Accept", "application/json");
+                return params;
+            }
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return datajson == null ? "{}".getBytes("utf-8") : datajson.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+
+                    return null;
+                }
+            }
+        };
+        if (requestQueue == null) {
+            requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(request);
+        } else {
+            requestQueue.add(request);
+        }
+    }
+
+    public static String fixEncoding(String response) {
+        try {
+            byte[] u = response.toString().getBytes(
+                    "ISO-8859-1");
+            response = new String(u, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return response;
+    }
+
+    public void gologin() {
+        Intent i = new Intent(this, MainActivity.class);
+        // bandera para que no se creen nuevas actividades innecesarias
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+    }
 }

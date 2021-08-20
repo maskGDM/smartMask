@@ -42,7 +42,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="130dp"
         android:layout_weight="3"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -205,7 +205,7 @@
 
         </LinearLayout>
 
-        <!--<LinearLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="2"
@@ -220,6 +220,7 @@
                 android:elevation="0dp"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="eliminarMask"
                 app:cardBackgroundColor="#fffffa"
                 app:cardCornerRadius="20dp">
 
@@ -233,18 +234,18 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_margin="5dp"
-                        android:background="@drawable/ic_baseline_multiline_chart_24" />
+                        android:background="@drawable/ic_delete" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
-                        android:text="Log off"
+                        android:text="Delete Mask"
                         android:textColor="#343a40"
                         android:textSize="20sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-        </LinearLayout>-->
+        </LinearLayout>
     </LinearLayout>
 
     <ImageView

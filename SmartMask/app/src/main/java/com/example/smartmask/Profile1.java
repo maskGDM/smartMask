@@ -74,8 +74,6 @@ public class Profile1 extends AppCompatActivity {
                     }
                 }
             });
-
-
         } else {
             Toast.makeText(Profile1.this, "No session", Toast.LENGTH_LONG).show();
             gologin();

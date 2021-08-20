@@ -17,6 +17,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +29,7 @@ import java.util.Map;
 
 public class Settings extends AppCompatActivity {
 
-    private String URL = "https://aplicaciones.uteq.edu.ec/smartmask/";
+    private String URL = "https://aplicaciones.uteq.edu.ec/smartmask/webapis/";
     private RequestQueue requestQueue;
 
     private EditText txtMac;
@@ -52,7 +54,7 @@ public class Settings extends AppCompatActivity {
                                 "    \"mac\":\"" + txtMac.getText() +"\"\n" +
                                 "}";
                         Log.i("Logs", jsonmac);
-                      //  connectmask(jsonmac);
+                        connectmask(jsonmac);
                     }else{
                         Toast.makeText(Settings.this, "Empty fields", Toast.LENGTH_LONG).show();
                     }
@@ -108,7 +110,7 @@ public class Settings extends AppCompatActivity {
         //Obtención de datos del web service utilzando Volley
         // requestQueue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(
-                Request.Method.POST,URL+"maskapis/",
+                Request.Method.POST,URL+"maskapis/saveMask",
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -119,7 +121,7 @@ public class Settings extends AppCompatActivity {
                             if (size > 0)
                             {
                                 json_transform = new JSONObject(response);
-                                Log.e("resp", response);
+                                Toast.makeText(Settings.this, json_transform.getString("information"), Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -169,5 +171,4 @@ public class Settings extends AppCompatActivity {
         }
         return response;
     }
-
 }
