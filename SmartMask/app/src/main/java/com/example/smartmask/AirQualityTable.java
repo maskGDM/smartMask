@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -38,6 +39,8 @@ public class AirQualityTable extends AppCompatActivity {
     private DatePickerDialog datePickerDialog,dateFinish;
     private TextView txtFechaInicio,txtFechaFin;
     private Button btnhearhregistry;
+    private ProgressDialog proDialog;
+    private TableLayout table;
 
     String jsonDataUser = "{}";
     RequestQueue requestQueue;
@@ -52,7 +55,10 @@ public class AirQualityTable extends AppCompatActivity {
         setContentView(R.layout.activity_air_quality_table);
         init();
         sessionuser();
+
         if (user_informationid!=null && email != null) {
+
+
             Log.i("User", email);
             requestQueue = Volley.newRequestQueue(this);
             String jsonfiltrarall = "{\n" +
@@ -65,6 +71,7 @@ public class AirQualityTable extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(txtFechaInicio.getText() !=null && txtFechaFin.getText() !=null){
+                        table.removeViews(1, Math.max(0, table.getChildCount() - 1));
                         String jsonfiltrarbydate = "{\n" +
                                 "    \"user_informationid\":\"" + user_informationid +"\",\n" +
                                 "    \"stardate\":\"" + txtFechaInicio.getText() +"\",\n" +
@@ -218,6 +225,7 @@ public class AirQualityTable extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, URL +  ruta, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
                 Log.i("Logs", response);
                 JsonParser jsonParser = new JsonParser();
                 JsonObject jsonObject = jsonParser.parse(response).getAsJsonObject();
@@ -303,7 +311,9 @@ public class AirQualityTable extends AppCompatActivity {
     }
 
     private void tableAdapt(ArrayList<String[]> lista, boolean dataAir) {
-        TableLayout table = (TableLayout) findViewById(R.id.table);
+
+        table = (TableLayout) findViewById(R.id.table);
+
         ModalAirQualityTable tbModel = new ModalAirQualityTable(AirQualityTable.this, table);
 
         if (dataAir) {
