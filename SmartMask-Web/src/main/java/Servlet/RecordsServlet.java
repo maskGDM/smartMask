@@ -68,23 +68,25 @@ public class RecordsServlet extends HttpServlet {
 //        int type = Integer.parseInt(request.getParameter("T"));
 //        switch (type) {
 //            case 1: {
-                ////INSERT BD///      
-                u.zonaHoraria();
-                
-                String JSON = "{\"Records\":{\"temperature\":" + (request.getParameter("t")) + ","
-                        + "\"ppminternal\":" + Integer.parseInt(request.getParameter("pp")) + ","
-                        + "\"pressure\":" + (request.getParameter("p")) + ","
-                        + "\"altitude\":" + (request.getParameter("al")) + ","
-                        + "\"humidity\":" + (request.getParameter("h")) + ","
-                        + "\"alert\":" + (request.getParameter("a")) + ","
-                        + "\"mask_code\":" + Integer.parseInt(request.getParameter("m")) + "}}";
+        ////INSERT BD///      
+        u.zonaHoraria();
+
+        String JSON = "{\"Records\":{\"temperature\":" + (request.getParameter("t")) + ","
+                + "\"ppminternal\":" + Integer.parseInt(request.getParameter("pi")) + ","
+                + "\"ppmexternal\":" + Integer.parseInt(request.getParameter("pe")) + ","
+                + "\"pressure\":" + (request.getParameter("p")) + ","
+                + "\"altitude\":" + (request.getParameter("al")) + ","
+                + "\"humidity\":" + (request.getParameter("h")) + ","
+                + "\"alert\":" + (request.getParameter("a")) + ","
+                + "\"mask_code\":" + Integer.parseInt(request.getParameter("m")) + "}}";
 //                String JSON = "{\"Records\":{\"temperature\":" + (request.getParameter("t")) + ","
 //                        + "\"ppminternal\":" + (request.getParameter("ppm")) + ","
 //                        + "\"alert\":" + (request.getParameter("a")) + ","
 //                        + "\"mask_code\":" + Integer.parseInt(request.getParameter("m")) + "}}";
-                records.setJson(JSON);
-                //averageApi = (Integer.parseInt(request.getParameter("ppminternal")) + Integer.parseInt(request.getParameter("ppmexternal"))) / 2;
-                jsonResult = "Outcome = " + recordsDAO.addRecords(records) + " for the String " + JSON;
+        System.out.println(JSON);
+        records.setJson(JSON);
+        //averageApi = (Integer.parseInt(request.getParameter("ppminternal")) + Integer.parseInt(request.getParameter("ppmexternal"))) / 2;
+        jsonResult = "Outcome = " + recordsDAO.addRecords(records) + " for the String " + JSON;
 //                break;
 //            }
 //            case 2: {

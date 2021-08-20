@@ -91,6 +91,19 @@ public class UserDAO implements UserCrud {
         }
     }
 
+    public String[] saveUser(User user) {
+        String query = String.format("select * from addusermovil('%s')", user.returnXml());
+        System.out.println(query);
+        DefaultTableModel tab = conex.returnRecord(query);
+        if (tab.getRowCount() > 0) {
+            return new String[]{
+                tab.getValueAt(0, 0).toString(),
+                tab.getValueAt(0, 1).toString()};
+        } else {
+            return new String[]{"4", ""};
+        }
+    }
+
     /**
      *
      * Method for logging in User
