@@ -76,6 +76,7 @@
                 andriod:id="@+id/Accion"
                 andriod:layout_width="match_parent"
                 andriod:layout_height="wrap_content"
+                andriod:checked="true"/>
                 andriod:text="Action" />
 
         </LinearLayout>
