@@ -233,7 +233,9 @@ public class Menu extends AppCompatActivity {
         handler.postDelayed(mTicker,5000);//se ejecutara cada 5 segundos
     }
     public void eliminarMask(View view){
-        Intent intent=new Intent(Menu.this, DeleteMask.class);
+       // Intent intent=new Intent(Menu.this, DeleteMask.class);
+        Intent intent=new Intent(Menu.this, ListMaskActivity.class);
+
         Bundle b=new Bundle();
 
         intent.putExtras(b);

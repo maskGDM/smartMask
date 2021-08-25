@@ -21,15 +21,16 @@
 
         <ImageView
             andriod:id="@+id/imgfoto"
-            andriod:layout_width="110dp"
-            andriod:layout_height="160dp"
+            andriod:layout_width="102dp"
+            andriod:layout_height="129dp"
             andriod:layout_alignParentStart="true"
             andriod:layout_alignParentLeft="true"
             andriod:layout_centerVertical="true"
             andriod:layout_gravity="center"
             andriod:paddingLeft="10dp"
             andriod:paddingRight="10dp"
-            andriod:scaleType="centerCrop" />
+            andriod:scaleType="centerCrop"
+            app:srcCompat="@drawable/logosmartmask" />
 
         <LinearLayout
             andriod:id="@+id/linearLayout"
@@ -42,7 +43,7 @@
             andriod:orientation="vertical">
 
             <TextView
-                andriod:id="@+id/txtMaskID"
+                andriod:id="@+id/mask_code"
                 andriod:layout_width="match_parent"
                 andriod:layout_height="wrap_content"
                 andriod:layout_marginBottom="2dp"
@@ -52,7 +53,7 @@
                 andriod:textStyle="bold" />
 
             <TextView
-                andriod:id="@+id/txtfecha"
+                andriod:id="@+id/dateadded"
                 andriod:layout_width="match_parent"
                 andriod:layout_height="wrap_content"
                 andriod:paddingTop="8sp"
@@ -76,7 +77,6 @@
                 andriod:layout_width="match_parent"
                 andriod:layout_height="wrap_content"
                 andriod:text="Action" />
-
 
         </LinearLayout>
     </RelativeLayout>
