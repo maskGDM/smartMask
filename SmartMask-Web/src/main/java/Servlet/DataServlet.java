@@ -80,7 +80,7 @@ public class DataServlet extends HttpServlet {
         int type = Integer.parseInt(request.getParameter("Type"));
         switch (type) {
             case 1: {
-                data.setUser_informationid(Integer.parseInt(request.getParameter("Datum")));
+                data.setUser_informationid((request.getParameter("Datum")));
                 String getData = dataDAO.jsonData(data);
 
                 if (!"[]".equals(getData.trim())) {

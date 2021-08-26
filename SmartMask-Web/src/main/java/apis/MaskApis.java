@@ -6,6 +6,7 @@
 package apis;
 
 import Config.Methods;
+import Controller.DataCtrl;
 import Controller.MaskCtrl;
 import Controller.RecordsCtrl;
 import Controller.UserCtrl;
@@ -36,6 +37,7 @@ public class MaskApis {
     RecordsCtrl recordsCtrl;
     UserCtrl userCtrl;
     MaskCtrl maskCtrl;
+    DataCtrl dataCtrl;
 
     /**
      * Creates a new instance of Project, Files, Data
@@ -44,7 +46,7 @@ public class MaskApis {
         recordsCtrl = new RecordsCtrl();
         userCtrl = new UserCtrl();
         maskCtrl = new MaskCtrl();
-
+        dataCtrl = new DataCtrl();
     }
 
     /*
@@ -352,6 +354,117 @@ public class MaskApis {
 //            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
 //            if (res[0].equals("2")) {
             String[] res = maskCtrl.deleteMask(mask_code);
+            message = Methods.getJsonMessage(res[0], res[1], res[2]);
+//            } else {
+//                message = Methods.getJsonMessage("4", "Error in the request parameters.", "[]");
+//            }
+        } else {
+            message = Methods.getJsonMessage("4", "Missing data.", "[]");
+        }
+        return Response.ok(message)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+
+    /*
+     * ********************************************
+     * Data
+     *********************************************
+     */
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    @Path("/selectData")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response selectData(String data) {
+        String message;
+        System.out.println("selectData()");
+        System.out.println(data);
+        JsonObject Jso = Methods.stringToJSON(data);
+        System.out.println(Jso.toString());
+        if (Jso.size() > 0) {
+//            String sessionToken = Methods.JsonToString(Jso, "user_token", "");
+//            String[] clains = Methods.getDataToJwt(sessionToken);
+
+            String user_informationid = Methods.JsonToString(Jso, "user_informationid", "");
+
+//            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
+//            if (res[0].equals("2")) {
+            String[] res = dataCtrl.selectData(user_informationid);
+            message = Methods.getJsonMessage(res[0], res[1], res[2]);
+//            } else {
+//                message = Methods.getJsonMessage("4", "Error in the request parameters.", "[]");
+//            }
+        } else {
+            message = Methods.getJsonMessage("4", "Missing data.", "[]");
+        }
+        return Response.ok(message)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    @Path("/saveData")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response saveData(String data) {
+        String message;
+        System.out.println("saveData()");
+        System.out.println(data);
+        JsonObject Jso = Methods.stringToJSON(data);
+        System.out.println(Jso.toString());
+        if (Jso.size() > 0) {
+//            String sessionToken = Methods.JsonToString(Jso, "user_token", "");
+//            String[] clains = Methods.getDataToJwt(sessionToken);
+
+            String user_informationid = Methods.JsonToString(Jso, "user_informationid", "");
+            Double maxvalueco2 = Double.parseDouble(Methods.JsonToString(Jso, "maxvalueco2", "0"));
+            Double minvalueco2 = Double.parseDouble(Methods.JsonToString(Jso, "minvalueco2", "0"));
+            Double maxvalueco = Double.parseDouble(Methods.JsonToString(Jso, "maxvalueco", "0"));
+            Double minvalueco = Double.parseDouble(Methods.JsonToString(Jso, "minvalueco", "0"));
+            Double maxvaluec4h10 = Double.parseDouble(Methods.JsonToString(Jso, "maxvaluec4h10", "0"));
+            Double mainvaluec4h10 = Double.parseDouble(Methods.JsonToString(Jso, "mainvaluec4h10", "0"));
+            Double maxvaluenh3 = Double.parseDouble(Methods.JsonToString(Jso, "maxvaluenh3", "0"));
+            Double minvaluenh3 = Double.parseDouble(Methods.JsonToString(Jso, "minvaluenh3", "0"));
+//            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
+//            if (res[0].equals("2")) {
+            String[] res = dataCtrl.saveData(user_informationid, maxvalueco2, minvalueco2, maxvalueco, minvalueco, maxvaluec4h10, mainvaluec4h10, maxvaluenh3, minvaluenh3);
+            message = Methods.getJsonMessage(res[0], res[1], res[2]);
+//            } else {
+//                message = Methods.getJsonMessage("4", "Error in the request parameters.", "[]");
+//            }
+        } else {
+            message = Methods.getJsonMessage("4", "Missing data.", "[]");
+        }
+        return Response.ok(message)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "POST, GET, PUT, UPDATE, OPTIONS")
+                .header("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-with")
+                .build();
+    }
+
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    @Path("/restoreData")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response restoreData(String data) {
+        String message;
+        System.out.println("restoreData()");
+        System.out.println(data);
+        JsonObject Jso = Methods.stringToJSON(data);
+        System.out.println(Jso.toString());
+        if (Jso.size() > 0) {
+//            String sessionToken = Methods.JsonToString(Jso, "user_token", "");
+//            String[] clains = Methods.getDataToJwt(sessionToken);
+
+            String user_informationid = Methods.JsonToString(Jso, "user_informationid", "");
+
+//            String[] res = Methods.validatePermit(clains[0], clains[1], 1);
+//            if (res[0].equals("2")) {
+            String[] res = dataCtrl.restoreData(user_informationid);
             message = Methods.getJsonMessage(res[0], res[1], res[2]);
 //            } else {
 //                message = Methods.getJsonMessage("4", "Error in the request parameters.", "[]");
