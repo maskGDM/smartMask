@@ -279,7 +279,7 @@ public class AirQualityTable extends AppCompatActivity {
 //                            Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(AirQualityTable.this, "Datos no capturados", Toast.LENGTH_LONG).show();
+                        Toast.makeText(AirQualityTable.this, "Data not captured", Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Toast.makeText(AirQualityTable.this, "ERROR", Toast.LENGTH_LONG).show();

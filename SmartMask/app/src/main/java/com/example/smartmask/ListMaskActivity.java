@@ -144,7 +144,7 @@ public class ListMaskActivity extends AppCompatActivity {
                                         Log.e("Error",e.getMessage());
                                     }
                                 } else {
-                                    Toast.makeText(ListMaskActivity.this, "Datos no capturados", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(ListMaskActivity.this, "Data not captured", Toast.LENGTH_LONG).show();
                                 }
                             } else {
                                 Toast.makeText(ListMaskActivity.this, "ERROR", Toast.LENGTH_LONG).show();

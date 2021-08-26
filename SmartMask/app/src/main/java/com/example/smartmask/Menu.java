@@ -293,7 +293,7 @@ public class Menu extends AppCompatActivity {
                                         Log.e("Error",e.getMessage());
                                     }
                                 } else {
-                                    Toast.makeText(Menu.this, "Datos no capturados", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Menu.this, "Data not captured", Toast.LENGTH_LONG).show();
                                 }
                             } else {
                                 Toast.makeText(Menu.this, "ERROR", Toast.LENGTH_LONG).show();

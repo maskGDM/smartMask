@@ -204,7 +204,7 @@ public class AirQuiality extends AppCompatActivity {
                                         Log.e("Error",e.getMessage());
                                     }
                                 } else {
-                                    Toast.makeText(AirQuiality.this, "Datos no capturados", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(AirQuiality.this, "Data not captured", Toast.LENGTH_LONG).show();
                                 }
                             } else {
                             Toast.makeText(AirQuiality.this, "ERROR", Toast.LENGTH_LONG).show();
