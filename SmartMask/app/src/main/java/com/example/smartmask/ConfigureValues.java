@@ -65,8 +65,6 @@ public class ConfigureValues extends AppCompatActivity {
                             && Ammomin !=null && Ammomax !=null && Butanomin !=null
                             && Butanomax !=null){
 
-
-
                         String jsondata = "{\n" +
                                 "    \"user_informationid\":\"" + user_informationid +"\",\n" +
                                 "    \"minvalueco2\":\"" + Dioximin.getText() +"\",\n" +
