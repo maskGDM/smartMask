@@ -11,12 +11,13 @@ Adafruit_BME280 bme;
 
 SoftwareSerial SIM900(7, 8);//tx, rx
 int analogica_mq135internal = 0;//variable internal sensor scope
+int analogica_mq135external = 0;//variable external sensor scope
 String temperatura_bme280 = " NAN";
 String presion_bme280 = " NAN";
 String altitud_bme280 = " NAN";
 String humedad_bme280 = " NAN";
 boolean alertppm = false;//load default alert false
-int max_value = 200;//bad air quality average upper limit
+int max_value = 220;//bad air quality average upper limit
 unsigned long timeelapsed;//arduino time to power on
 unsigned long timesend;//time of 2 min to send + 1 min it will take to send
 
@@ -39,11 +40,15 @@ void loop()
 {
 
   analogica_mq135internal = analogRead(A0);//Get data from internal sensor from analog port 0
-  Serial.println("/-----------------------------/");
-  Serial.print("Air quality = ");
-  Serial.print(analogica_mq135internal, DEC);
-  Serial.println(" ppm ");//print internal sensor data
+  analogica_mq135external = analogRead(A7);//Get data from external sensor from analog port 2
 
+  Serial.println("/-----------------------------/");
+  Serial.print("Air quality internal = ");
+  Serial.print(analogica_mq135internal, DEC);
+  Serial.println(" ppm i");//print internal sensor data
+  Serial.print("Air quality external = ");
+  Serial.print(analogica_mq135external, DEC);
+  Serial.println(" ppm e");//print internal sensor data
  //The begin(I2C_ADDR) function takes the I2C address of the module as parameter. 
  //This function initializes I2C interface with given I2C Address and checks if the chip ID is correct. 
  //It then resets the chip using soft-reset & waits for the sensor for calibration after wake-up.
@@ -78,11 +83,11 @@ void loop()
   Serial.print(humedad_bme280);
   Serial.println("%");
  } 
-  if (analogica_mq135internal >= max_value) {//check average of gases does not exceed bad air quality
+  if (((analogica_mq135internal+analogica_mq135external)/2) >= max_value) {//check average of gases does not exceed bad air quality
     Serial.println("/------------ALERT INTERNAL -------------/");
     Serial.println(String(analogica_mq135internal));
     Serial.println(" ppm average");//print ppm alert
-    digitalWrite(13, HIGH);//activate alert
+    //digitalWrite(13, HIGH);//activate alert
     alertppm = true;//load alert for app
     delay(2000);//2sg sound alert
     digitalWrite(13, LOW);//disable alert
@@ -220,7 +225,7 @@ void SubmitHttpRequest()
 
   // set http param value
   // ToDO : send dynamic value
-  String webServices = "http://190.15.134.19:8080/SmartBox/RecordsS?pi=" + String(analogica_mq135internal) + "&pe=" + String(analogica_mq135internal) + + "&m=" + String("520181") + "&a="+boolean(alertppm)+ "&t="+String(temperatura_bme280)+ "&p="+String(presion_bme280)+ "&al="+String(altitud_bme280)+ "&h="+String(humedad_bme280)+"";//concatenated string for submission
+  String webServices = "http://190.15.134.7/smartmask/RecordsS?pi=" + String(analogica_mq135internal) + "&pe=" + String(analogica_mq135internal) + + "&m=" + String("520181") + "&a="+boolean(alertppm)+ "&t="+String(temperatura_bme280)+ "&p="+String(presion_bme280)+ "&al="+String(altitud_bme280)+ "&h="+String(humedad_bme280)+"";//concatenated string for submission
   Serial.println(webServices);
   SIM900.println("AT+HTTPPARA=\"URL\",\"" + String(webServices) + "\"");//I send to the application through the web services
   delay(5000);//5sg
