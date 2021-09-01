@@ -3,8 +3,11 @@ package com.example.smartmask;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
@@ -40,8 +43,11 @@ public class ListMaskActivity extends AppCompatActivity {
 
     private String URL = "https://aplicaciones.uteq.edu.ec/smartmask/webapis/";
     private RequestQueue requestQueue;
+    private EditText etSearchMask;
+    RecyclerView recyclerView;
 
     private List<MaskModel> elements;
+    ListAdapterMask listAdaptermsk;
 
     //session
     private String user_informationid,user,names,lastnames,email,imguser,birthdaydate;
@@ -54,6 +60,7 @@ public class ListMaskActivity extends AppCompatActivity {
         init();
         sessionuser();
 
+
         if (user_informationid!=null && email != null) {
             Log.i("User-Menu", email);
             String datajson = "{\n" +
@@ -61,6 +68,24 @@ public class ListMaskActivity extends AppCompatActivity {
                     "}";
             Log.i("Logs", datajson);
             getdata(datajson);
+
+            etSearchMask.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    filterp(s.toString());
+                }
+            });
+
 
         } else {
             Toast.makeText(ListMaskActivity.this, "No session", Toast.LENGTH_LONG).show();
@@ -71,6 +96,7 @@ public class ListMaskActivity extends AppCompatActivity {
 
     public void init() {
         preferences = getSharedPreferences("Preferences", MODE_PRIVATE);
+        etSearchMask = findViewById(R.id.txtBuscador);
     }
     public void sessionuser(){
         user_informationid = preferences.getString("user_informationid",null);
@@ -88,6 +114,17 @@ public class ListMaskActivity extends AppCompatActivity {
                 Intent.FLAG_ACTIVITY_CLEAR_TASK |
                 Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(i);
+    }
+
+    public void filterp(String text){
+        ArrayList<MaskModel> filtermask= new ArrayList<>();
+
+        for(MaskModel pharmacyModel : elements){
+            if(pharmacyModel.getMask_code().toLowerCase().contains(text.toLowerCase())){
+                filtermask.add(pharmacyModel);
+            }
+        }
+        listAdaptermsk.filter(filtermask);
     }
 
     public static String fixEncoding(String response) {
@@ -135,11 +172,23 @@ public class ListMaskActivity extends AppCompatActivity {
                                                 e.printStackTrace();
                                             }
                                         }
-                                        ListAdapterMask listAdapter = new ListAdapterMask(elements, getApplicationContext());
-                                        RecyclerView recyclerView = findViewById(R.id.ListRecyclerView);
+                                        listAdaptermsk = new ListAdapterMask(elements, getApplicationContext());
+                                        recyclerView = findViewById(R.id.ListRecyclerView);
                                         recyclerView.setHasFixedSize(true);
                                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                                        recyclerView.setAdapter(listAdapter);
+                                        recyclerView.setAdapter(listAdaptermsk);
+
+                                       /* listAdaptermsk.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                Toast.makeText(getApplicationContext(),"Selecciona: " +
+                                                                elements.get(recyclerView.getChildAdapterPosition(view)).getDateadded(),
+                                                        Toast.LENGTH_SHORT).show();
+
+                                              //  interfacecommunicates_Fragments.SendPharmacy(listpharmacy.get(rvListPharmacy.getChildAdapterPosition(view)));
+                                            }
+                                        }); */
+
                                     }catch (Exception e) {
                                         Log.e("Error",e.getMessage());
                                     }
