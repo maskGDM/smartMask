@@ -26,18 +26,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Menu"
-        android:textColor="#343a40"
-        android:textSize="65sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -89,10 +77,12 @@
                         android:textColor="#343a40"
                         android:textSize="20sp" />
                 </LinearLayout>
+
             </androidx.cardview.widget.CardView>
 
+
             <androidx.cardview.widget.CardView
-                android:id="@+id/btnSettings"
+                android:id="@+id/btnAdd"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
@@ -100,7 +90,7 @@
                 android:elevation="0dp"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:onClick="Settings"
+
                 app:cardBackgroundColor="#fffffa"
                 app:cardCornerRadius="20dp">
 
@@ -114,17 +104,18 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_margin="5dp"
-                        android:background="@drawable/ic_baseline_settings_24" />
+                        android:background="@drawable/ic_add" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
-                        android:text="Settings"
+                        android:text="Add Mask"
                         android:textColor="#343a40"
                         android:textSize="20sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
         </LinearLayout>
 
         <LinearLayout
@@ -211,6 +202,7 @@
             android:layout_weight="2"
             android:orientation="horizontal">
 
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/btnlog_off"
                 android:layout_width="150dp"
@@ -241,6 +233,41 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
                         android:text="Delete Mask"
+                        android:textColor="#343a40"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btnSettings"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:elevation="0dp"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="Settings"
+                app:cardBackgroundColor="#fffffa"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_baseline_settings_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:text="Settings"
                         android:textColor="#343a40"
                         android:textSize="20sp" />
                 </LinearLayout>
