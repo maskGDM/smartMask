@@ -227,10 +227,10 @@ public class Menu extends AppCompatActivity {
             @Override
             public void run() {
                 notifypush(datajson); // método que se llamará frecuentemente para simular el tiempo real
-                handler.postDelayed(this,5000);//se ejecutara cada 1 segundos
+                handler.postDelayed(this,3000);//se ejecutara cada 1 segundos
             }
         };
-        handler.postDelayed(mTicker,5000);//se ejecutara cada 5 segundos
+        handler.postDelayed(mTicker,3000);//se ejecutara cada 5 segundos
     }
     public void eliminarMask(View view){
        // Intent intent=new Intent(Menu.this, DeleteMask.class);
@@ -281,7 +281,7 @@ public class Menu extends AppCompatActivity {
                                                 //   Log.d("ppminternal", jsonAirQuality.get("ppminternal").toString());
                                                 if(jsonAirQuality.get("alert").toString().equals("true")){
                                                    // Log.d("ALERTA PARA ",response);
-                                                    sendMyNotification("Notificación Android","Emitiendo alerta");
+                                                    sendMyNotification("Warning!","Accumulated gas levels are dangerous for your health.");
                                                     createNotificationChannel();
                                                 }
 

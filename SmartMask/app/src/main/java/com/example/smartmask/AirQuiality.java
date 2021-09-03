@@ -3,12 +3,14 @@ package com.example.smartmask;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -134,10 +136,10 @@ public class AirQuiality extends AppCompatActivity {
             @Override
             public void run() {
                 airquilitydatapost(datajson); // método que se llamará frecuentemente para simular el tiempo real
-                handler.postDelayed(this,5000);//se ejecutara cada 1 segundos
+                handler.postDelayed(this,3000);//se ejecutara cada 3 segundos
             }
         };
-        handler.postDelayed(mTicker,5000);//se ejecutara cada 5 segundos
+        handler.postDelayed(mTicker,3000);//se ejecutara cada 3 segundos
     }
 
  /*   // método para destruir el handler
@@ -347,6 +349,35 @@ public class AirQuiality extends AppCompatActivity {
         });
     }
 
+
+    // Se controla la pulsación del botón atrás
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == event.KEYCODE_BACK){
+            androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+            builder.setMessage("Would you like to return to the menu?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent i = new Intent(getApplicationContext(), Menu.class);
+                            // bandera para que no se creen nuevas actividades innecesarias
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                                    Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(i);
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            builder.show();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 
 

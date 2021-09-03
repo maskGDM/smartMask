@@ -1,11 +1,14 @@
 package com.example.smartmask;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -116,14 +120,26 @@ public class Settings extends AppCompatActivity {
                     public void onResponse(String response) {
                         int size = response.length();
                         response = fixEncoding(response);
+
                         JSONObject json_transform = null;
+
                         try {
                             if (size > 0)
-                            {
-                                json_transform = new JSONObject(response);
-                                Toast.makeText(Settings.this, json_transform.getString("information"), Toast.LENGTH_LONG).show();
+                            {   json_transform = new JSONObject(response);
+                                if(json_transform.getString("status").equals("2")){
+                                    Toast.makeText(Settings.this, json_transform.getString("information"), Toast.LENGTH_LONG).show();
+                                    goListmask();
+                                }else{
+                                    if(json_transform.getString("status").equals("3")){
+                                        Toast.makeText(Settings.this, json_transform.getString("information"), Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }else {
+                                Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
                             }
-                        } catch (JSONException e) {
+
+
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -170,5 +186,43 @@ public class Settings extends AppCompatActivity {
             return null;
         }
         return response;
+    }
+
+    public void goListmask() {
+        Intent i = new Intent(this, ListMaskActivity.class);
+        // bandera para que no se creen nuevas actividades innecesarias
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+    }
+
+    // Se controla la pulsación del botón atrás
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == event.KEYCODE_BACK){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Would you like to return to the menu?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent i = new Intent(getApplicationContext(), Menu.class);
+                            // bandera para que no se creen nuevas actividades innecesarias
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                                    Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(i);
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            builder.show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
