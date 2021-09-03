@@ -138,7 +138,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
-        android:hint="Birthday"
+        android:hint="Confirm password"
         android:inputType="textPassword"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
