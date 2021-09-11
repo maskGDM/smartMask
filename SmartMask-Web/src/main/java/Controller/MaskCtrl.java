@@ -41,7 +41,7 @@ public class MaskCtrl {
 
         if (resp[0].equals("2")) {
             status = resp[0];
-            data = resp[1];
+           data = "[]";
             message = "Los datos se han retornado correctamente";
         } else if (resp[0].equals("3")) {
             status = resp[0];
@@ -79,7 +79,7 @@ public class MaskCtrl {
 
         if (resp[0].equals("2")) {
             status = resp[0];
-            data = resp[1];
+           data = "[]";
             message = "Los datos se han retornado correctamente";
         } else if (resp[0].equals("3")) {
             status = resp[0];

@@ -87,7 +87,7 @@ void loop()
     Serial.println("/------------ALERT INTERNAL -------------/");
     Serial.println(String(analogica_mq135internal));
     Serial.println(" ppm average");//print ppm alert
-    //digitalWrite(13, HIGH);//activate alert
+    digitalWrite(13, HIGH);//activate alert
     alertppm = true;//load alert for app
     delay(2000);//2sg sound alert
     digitalWrite(13, LOW);//disable alert
@@ -225,7 +225,7 @@ void SubmitHttpRequest()
 
   // set http param value
   // ToDO : send dynamic value
-  String webServices = "http://190.15.134.7/smartmask/RecordsS?pi=" + String(analogica_mq135internal) + "&pe=" + String(analogica_mq135internal) + + "&m=" + String("520181") + "&a="+boolean(alertppm)+ "&t="+String(temperatura_bme280)+ "&p="+String(presion_bme280)+ "&al="+String(altitud_bme280)+ "&h="+String(humedad_bme280)+"";//concatenated string for submission
+  String webServices = "http://190.15.134.7/smartmask/RecordsS?pi=" + String(analogica_mq135internal) + "&pe=" + String(analogica_mq135external) + + "&m=" + String("520181") + "&a="+boolean(alertppm)+ "&t="+String(temperatura_bme280)+ "&p="+String(presion_bme280)+ "&al="+String(altitud_bme280)+ "&h="+String(humedad_bme280)+"";//concatenated string for submission
   Serial.println(webServices);
   SIM900.println("AT+HTTPPARA=\"URL\",\"" + String(webServices) + "\"");//I send to the application through the web services
   delay(5000);//5sg

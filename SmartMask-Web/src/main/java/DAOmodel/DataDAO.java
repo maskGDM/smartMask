@@ -29,6 +29,7 @@ public class DataDAO implements DataCrud {
      * @return Returns Data Information
      */
     public String jsonData(Data data) {
+        System.out.println("select * from data where user_informationid = " + data.getUser_informationid());
         return conex.getRecordsInJson("select * from data where user_informationid =" + data.getUser_informationid());
     }
 

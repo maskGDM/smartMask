@@ -43,12 +43,18 @@ public class DataCtrl {
     ) {
         Data dataMask = new Data();
         dataMask.setUser_informationid(user_informationid);
+
         dataMask.setMaxvalueco2(maxvalueco2);
         dataMask.setMinvalueco2(minvalueco2);
+
         dataMask.setMaxvalueco(maxvalueco);
         dataMask.setMinvalueco(minvalueco);
+
         dataMask.setMaxvaluec4h10(maxvaluec4h10);
         dataMask.setMainvaluec4h10(mainvaluec4h10);
+
+        dataMask.setMaxvaluenh3(maxvaluenh3);
+        dataMask.setMinvaluenh3(minvaluenh3);
 
         String status = "4", message = "Error al retornar datos", data = "[]";
 
@@ -56,7 +62,7 @@ public class DataCtrl {
 
         if (resp[0].equals("2")) {
             status = resp[0];
-            data = resp[1];
+            data = "[]";
             message = "Los datos se han retornado correctamente";
         } else if (resp[0].equals("3")) {
             status = resp[0];
@@ -94,7 +100,8 @@ public class DataCtrl {
 
         if (resp[0].equals("2")) {
             status = resp[0];
-            data = resp[1];
+//            data = resp[1];
+            data = "[]";
             message = "Los datos se han retornado correctamente";
         }
 

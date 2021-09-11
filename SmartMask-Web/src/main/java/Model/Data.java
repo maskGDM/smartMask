@@ -265,6 +265,30 @@ public class Data {
         this.json = json;
     }
 
+    public Double getMinvaluec4h10() {
+        return minvaluec4h10;
+    }
+
+    public void setMinvaluec4h10(Double minvaluec4h10) {
+        this.minvaluec4h10 = minvaluec4h10;
+    }
+
+    public Double getMaxvaluenh3() {
+        return maxvaluenh3;
+    }
+
+    public void setMaxvaluenh3(Double maxvaluenh3) {
+        this.maxvaluenh3 = maxvaluenh3;
+    }
+
+    public Double getMinvaluenh3() {
+        return minvaluenh3;
+    }
+
+    public void setMinvaluenh3(Double minvaluenh3) {
+        this.minvaluenh3 = minvaluenh3;
+    }
+
     public String returnXml() {
         JSONObject jsonU = new JSONObject(this);
         return "<data>" + XML.toString(jsonU) + "</data>";

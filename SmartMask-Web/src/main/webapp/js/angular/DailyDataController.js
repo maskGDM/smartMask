@@ -72,7 +72,9 @@ app.controller('DailyDataController', function ($scope, $http) {
             beforeSend: function () {
             },
             success: function (data) {
+
                 var parsedData = JSON.parse(data);
+                console.log(parsedData);
                 maxCo2M = parsedData.result[0].maxvalueco2;
                 minCo2 = parsedData.result[0].minvalueco2;
                 maxCo = parsedData.result[0].maxvalueco;
@@ -90,7 +92,7 @@ app.controller('DailyDataController', function ($scope, $http) {
     $scope.recargeAllDaily = function () {
         flag = true;
         airQualityGases(0);
-       
+
         airQualityGases(2);
         airQualityGases(3);
         airQualityGases(4);
